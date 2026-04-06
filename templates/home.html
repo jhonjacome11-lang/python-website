@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puro Chancho Familiar by J. | Venta directa · Quito, Ecuador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════════════════════════ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --white:#ffffff;
+  --beige:#f7f3ee;
+  --beige2:#efe9e0;
+  --red:#c0392b;
+  --red2:#a93226;
+  --red-light:#fdf0ee;
+  --black:#1a1a18;
+  --text:#2c2c2a;
+  --text2:#555550;
+  --text3:#8a8a85;
+  --border:#e2ddd6;
+  --border2:#ccc7be;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.07);
+  --shadow2:0 8px 32px rgba(0,0,0,.12);
+  --shadow-red:0 6px 24px rgba(192,57,43,.28);
+  --r:10px;--r2:16px;--r3:40px;
+}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--text);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
+
+/* ═══════════════════════════════════════════════════════════
+   LAYOUT UTILITIES
+═══════════════════════════════════════════════════════════ */
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+.section-head{text-align:center;margin-bottom:52px}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border-radius:var(--r3);background:var(--beige2);color:var(--text2);margin-bottom:10px}
+.tag.red{background:var(--red-light);color:var(--red)}
+.section-title{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--black);font-weight:900;margin-bottom:10px}
+.section-title .accent{color:var(--red)}
+.section-sub{font-size:.95rem;color:var(--text3);line-height:1.75;max-width:500px;margin:0 auto}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:none}
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Outfit',sans-serif;font-weight:600;border:none;cursor:pointer;transition:all .22s;text-decoration:none}
+.btn-primary{background:var(--red);color:white;padding:15px 30px;border-radius:var(--r3);font-size:.95rem;box-shadow:var(--shadow-red)}
+.btn-primary:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(192,57,43,.38)}
+.btn-outline{background:var(--white);color:var(--black);padding:14px 24px;border-radius:var(--r3);font-size:.9rem;border:1.5px solid var(--border2)}
+.btn-outline:hover{border-color:var(--red);color:var(--red)}
+
+/* ═══════════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════════ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+#nav.scrolled{box-shadow:var(--shadow)}
+.nav-inner{max-width:1160px;margin:0 auto;padding:0 24px;height:66px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:38px;height:38px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.logo-name{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black);line-height:1.2}
+.logo-sub{font-size:.62rem;color:var(--text3);font-family:'Outfit',sans-serif;display:block;font-weight:500}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:.82rem;font-weight:500;padding:8px 14px;border-radius:var(--r3);transition:all .2s}
+.nav-links a:hover{background:var(--beige);color:var(--black)}
+.nav-cta{background:var(--red)!important;color:white!important;font-weight:600!important}
+.nav-cta:hover{background:var(--red2)!important;box-shadow:var(--shadow-red)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--black);border-radius:2px;display:block}
+
+/* ═══════════════════════════════════════════════════════════
+   ANNOUNCE BAR
+═══════════════════════════════════════════════════════════ */
+.announce-bar{background:var(--red);color:white;text-align:center;padding:11px 24px;font-size:.8rem;font-weight:500;margin-top:66px}
+.announce-bar strong{font-weight:700}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════════ */
+#hero{min-height:90vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--white)}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;opacity:.3;pointer-events:none}
+.hero-glow{position:absolute;right:-200px;top:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.07) 0%,transparent 70%);pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:2;padding:80px 0 60px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);background:var(--white);padding:7px 16px;border-radius:var(--r3);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);margin-bottom:22px}
+.hero-dot{width:7px;height:7px;background:#27ae60;border-radius:50%;animation:pdot 2s infinite;flex-shrink:0}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.hero-title{font-size:clamp(2.3rem,5vw,4rem);font-weight:900;color:var(--black);line-height:1.05;margin-bottom:20px}
+.hero-title em{color:var(--red);font-style:italic}
+.hero-desc{font-size:1.02rem;color:var(--text2);line-height:1.78;margin-bottom:36px;font-weight:300;max-width:460px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--black)}
+.stat-lbl{font-size:.7rem;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+/* Hero card */
+.hero-card{background:var(--white);border-radius:var(--r2);padding:26px;box-shadow:var(--shadow2);border:1px solid var(--border);position:relative}
+.hcard-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.hcard-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--black)}
+.hcard-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r3);background:#e8f8ef;color:#27ae60;display:flex;align-items:center;gap:5px}
+.hcard-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border)}
+.hcard-row:last-child{border-bottom:none}
+.hcard-icon{width:34px;height:34px;background:var(--beige);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.hcard-name{font-size:.84rem;font-weight:600;color:var(--text)}
+.hcard-sub{font-size:.68rem;color:var(--text3)}
+.hcard-price{font-family:'Playfair Display',serif;font-weight:700;color:var(--red);font-size:.95rem}
+.float-badge{position:absolute;background:white;border-radius:var(--r2);padding:12px 16px;box-shadow:var(--shadow2);border:1px solid var(--border)}
+.fb-top{top:-22px;left:-28px}
+.fb-bot{bottom:-22px;right:-22px}
+.fb-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--text3);margin-bottom:3px}
+.fb-val{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;color:var(--black)}
+.fb-val small{font-size:.65rem;color:var(--text3);font-family:'Outfit',sans-serif;font-weight:400}
+
+/* ═══════════════════════════════════════════════════════════
+   PRODUCTS
+═══════════════════════════════════════════════════════════ */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.prod-card{background:var(--white);border-radius:var(--r2);border:1px solid var(--border);overflow:hidden;transition:all .3s;box-shadow:var(--shadow)}
+.prod-card:hover{transform:translateY(-4px);box-shadow:var(--shadow2)}
+.prod-thumb{height:196px;position:relative;display:flex;align-items:center;justify-content:center;background:var(--beige);overflow:hidden}
+.prod-thumb .emo{font-size:5rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,.1))}
+.avail-tag{position:absolute;top:12px;left:12px;font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 11px;border-radius:var(--r3);display:flex;align-items:center;gap:5px;background:white;box-shadow:var(--shadow)}
+.avail-tag.av{color:#27ae60}.avail-tag.rs{color:#e67e22;background:#fff8f0}.avail-tag.sn{color:var(--text3);background:var(--beige)}
+.dot-g{width:6px;height:6px;background:#27ae60;border-radius:50%;animation:pdot 2s infinite;flex-shrink:0}
+.dot-o{width:6px;height:6px;background:#e67e22;border-radius:50%;flex-shrink:0}
+.dot-gr{width:6px;height:6px;background:var(--text3);border-radius:50%;flex-shrink:0}
+.prod-body{padding:22px}
+.prod-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--black);margin-bottom:5px}
+.prod-gen{font-size:.76rem;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:5px}
+.price-block{background:var(--red-light);border:1px solid rgba(192,57,43,.12);border-radius:var(--r);padding:13px 15px;margin-bottom:12px}
+.price-nums{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--red)}
+.price-unit{font-size:.7rem;color:var(--red);opacity:.75;margin-top:2px;font-weight:500}
+.price-ref{font-size:.67rem;color:var(--text3);font-style:italic;margin-top:5px;display:flex;align-items:center;gap:4px}
+.calc-lbl{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text2);margin-bottom:8px;display:block}
+.qty-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.qty-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border2);background:var(--white);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:600;transition:all .2s;font-family:'Outfit',sans-serif}
+.qty-btn:hover{border-color:var(--red);color:var(--red);background:var(--red-light)}
+.qty-num{font-size:1.1rem;font-weight:700;min-width:28px;text-align:center}
+.range-wrap{margin-bottom:6px}
+.rslider{width:100%;height:4px;border-radius:2px;outline:none;-webkit-appearance:none;cursor:pointer}
+.rslider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--red);cursor:pointer;box-shadow:0 2px 8px rgba(192,57,43,.35)}
+.range-display{font-size:.76rem;color:var(--text3);text-align:right;margin-bottom:10px}
+.est-box{background:var(--black);border-radius:var(--r);padding:12px 15px;color:white;text-align:center;margin-bottom:14px}
+.est-lbl{font-size:.6rem;opacity:.5;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.est-val{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:900}
+.est-note{font-size:.6rem;opacity:.4;margin-top:2px}
+.reserve-note{background:var(--beige);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;padding:8px 12px;font-size:.72rem;color:var(--text2);margin-bottom:12px;line-height:1.55}
+.btn-wa{width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--r);font-size:.88rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-wa:hover{background:var(--red2);transform:translateY(-1px);box-shadow:var(--shadow-red)}
+.btn-wa-sec{background:var(--white);color:var(--red);border:1.5px solid var(--red)}
+.btn-wa-sec:hover{background:var(--red-light)}
+
+/* ═══════════════════════════════════════════════════════════
+   CUTS SECTION
+═══════════════════════════════════════════════════════════ */
+.cuts-bg{background:var(--beige)}
+.cuts-layout{display:grid;grid-template-columns:3fr 2fr;gap:28px;align-items:start}
+.cuts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.cut-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden}
+.cut-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transition:transform .2s;transform-origin:bottom}
+.cut-card:hover::before,.cut-card.active::before{transform:scaleY(1)}
+.cut-card:hover,.cut-card.active{border-color:var(--red);background:var(--red-light);transform:translateY(-2px)}
+.cut-chk{position:absolute;top:8px;right:8px;width:18px;height:18px;background:var(--red);border-radius:50%;display:none;align-items:center;justify-content:center;color:white;font-size:.58rem}
+.cut-card.active .cut-chk{display:flex}
+.cut-name{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;color:var(--black);margin-bottom:2px}
+.cut-price{font-size:.76rem;font-weight:700;color:var(--red)}
+.cut-desc{font-size:.67rem;color:var(--text3);margin-top:3px}
+.calc-box{background:var(--white);border-radius:var(--r2);padding:24px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.calc-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.calc-icon{width:40px;height:40px;background:var(--red-light);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.calc-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black)}
+.calc-subtitle{font-size:.72rem;color:var(--red);font-weight:600}
+.calc-empty{text-align:center;color:var(--text3);font-size:.86rem;padding:28px 0;line-height:1.7}
+/* Cart */
+.cart-area{margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
+.cart-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black);margin-bottom:10px}
+.cart-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--border);font-size:.8rem;gap:6px}
+.cart-row-name{font-weight:600;color:var(--text);flex:1}
+.cart-row-detail{color:var(--text3);white-space:nowrap}
+.cart-row-price{font-weight:700;color:var(--red);font-family:'Playfair Display',serif;white-space:nowrap}
+.cart-row-del{color:var(--text3);cursor:pointer;transition:color .2s;margin-left:4px}
+.cart-row-del:hover{color:var(--red)}
+.cart-total{background:var(--black);border-radius:var(--r);padding:13px 16px;margin-top:12px;display:flex;align-items:center;justify-content:space-between}
+.cart-total-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45)}
+.cart-total-val{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;color:white}
+.form-input{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-size:.84rem;font-family:'Outfit',sans-serif;color:var(--text);transition:border-color .2s;background:var(--white)}
+.form-input:focus{outline:none;border-color:var(--red)}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ═══════════════════════════════════════════════════════════
+   TRUST
+═══════════════════════════════════════════════════════════ */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.trust-card{border-radius:var(--r2);padding:26px 20px;border:1px solid var(--border);transition:all .3s;background:var(--white)}
+.trust-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:var(--red)}
+.trust-icon{width:50px;height:50px;border-radius:var(--r2);background:var(--red-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px}
+.trust-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black);margin-bottom:7px}
+.trust-desc{font-size:.78rem;color:var(--text3);line-height:1.7}
+
+/* ═══════════════════════════════════════════════════════════
+   DELIVERY
+═══════════════════════════════════════════════════════════ */
+.del-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.del-card{background:var(--black);border-radius:var(--r2);padding:30px;color:white}
+.del-card h3{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;margin-bottom:18px}
+.zone-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.zone-row:last-of-type{border-bottom:none}
+.zone-name{font-weight:600;font-size:.86rem}
+.zone-eta{font-size:.7rem;opacity:.5;margin-top:2px}
+.zone-badge{font-size:.68rem;font-weight:700;color:var(--red);background:rgba(192,57,43,.15);padding:4px 10px;border-radius:var(--r3);white-space:nowrap}
+.zone-badge.free{color:#27ae60;background:rgba(39,174,96,.15)}
+.safe-note{background:rgba(255,255,255,.06);border-radius:var(--r);padding:13px;font-size:.76rem;line-height:1.65;opacity:.65;margin-top:16px;border-left:2px solid var(--red)}
+.pay-sec{margin-top:22px}
+.pay-title{font-family:'Playfair Display',serif;font-weight:700;font-size:.88rem;color:var(--black);margin-bottom:10px}
+.pay-item{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--white);border-radius:var(--r);font-size:.82rem;color:var(--text2);margin-bottom:8px;border:1px solid var(--border)}
+.info-list{display:flex;flex-direction:column;gap:14px}
+.info-row{display:flex;gap:14px;padding:18px;background:var(--white);border-radius:var(--r2);border:1px solid var(--border)}
+.info-ic{font-size:1.25rem;flex-shrink:0;margin-top:3px}
+.info-title{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;color:var(--black);margin-bottom:4px}
+.info-body{font-size:.76rem;color:var(--text3);line-height:1.65}
+
+/* ═══════════════════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════════════════ */
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.ct-card{background:var(--white);border-radius:var(--r2);padding:30px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.ct-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--black);margin-bottom:18px}
+.ct-method{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid var(--border)}
+.ct-method:last-of-type{border-bottom:none}
+.ct-icon{width:38px;height:38px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;background:var(--beige)}
+.ct-lbl{font-size:.67rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--text3);margin-bottom:2px}
+.ct-val{font-size:.86rem;color:var(--text);font-weight:500}
+.btn-wa-big{width:100%;padding:15px;background:#25D366;color:white;border:none;border-radius:var(--r2);font-size:.93rem;font-weight:700;cursor:pointer;font-family:'Playfair Display',serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;text-decoration:none}
+.btn-wa-big:hover{background:#1eae56;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.35)}
+.form-group{margin-bottom:10px}
+select.form-input{color:var(--text)}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════ */
+footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px}
+.ft-inner{max-width:1160px;margin:0 auto}
+.ft-top{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:22px}
+.ft-brand .fn{font-family:'Playfair Display',serif;font-size:1.05rem;color:white;font-weight:900;margin-bottom:10px}
+.ft-brand p{font-size:.76rem;line-height:1.7;max-width:240px}
+.ft-col h4{color:white;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}
+.ft-col ul{list-style:none}
+.ft-col li{margin-bottom:7px}
+.ft-col a{color:rgba(255,255,255,.42);text-decoration:none;font-size:.76rem;transition:color .2s}
+.ft-col a:hover{color:var(--red)}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.72rem}
+
+/* ═══════════════════════════════════════════════════════════
+   WA FLOAT + TOAST
+═══════════════════════════════════════════════════════════ */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:300;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .2s;animation:wap 3s infinite}
+@keyframes wap{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5)}50%{box-shadow:0 4px 32px rgba(37,211,102,.75)}}
+.wa-float:hover{transform:scale(1.08)}
+#toast{position:fixed;bottom:94px;right:24px;background:var(--black);color:white;padding:11px 17px;border-radius:var(--r);font-size:.8rem;z-index:999;transform:translateY(60px);opacity:0;transition:all .32s;pointer-events:none;box-shadow:var(--shadow2);max-width:260px;border-left:3px solid var(--red)}
+#toast.show{transform:translateY(0);opacity:1}
+
+/* ═══════════════════════════════════════════════════════════
+   MODAL LECHON
+═══════════════════════════════════════════════════════════ */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-ov.open{opacity:1;pointer-events:all}
+.modal-box{background:white;border-radius:var(--r2);padding:30px;max-width:440px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,.25);transform:translateY(22px);transition:transform .3s}
+.modal-ov.open .modal-box{transform:translateY(0)}
+.modal-box h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--black);margin-bottom:5px}
+.modal-sub{font-size:.8rem;color:var(--text3);margin-bottom:22px}
+.modal-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:.86rem}
+.modal-row .key{color:var(--text2);font-weight:500}
+.modal-row .val{font-weight:700;color:var(--text)}
+.modal-total{background:var(--black);border-radius:var(--r);padding:16px;margin:18px 0;text-align:center}
+.modal-total .lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:3px}
+.modal-total .val{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:white}
+.modal-total .note{font-size:.62rem;color:rgba(255,255,255,.32);margin-top:3px}
+.modal-btns{display:flex;gap:10px;margin-top:16px}
+.modal-btns button{flex:1;padding:12px;border-radius:var(--r);font-size:.86rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;border:none}
+.btn-cancel{background:var(--beige);color:var(--text2)}
+.btn-confirm{background:#25D366;color:white}
+.btn-confirm:hover{background:#1eae56}
+
+/* ═══════════════════════════════════════════════════════════
+   ADMIN PANEL
+═══════════════════════════════════════════════════════════ */
+#admin-ov{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}
+#admin-ov.open{opacity:1;pointer-events:all}
+.admin-panel{background:white;border-radius:var(--r2);width:100%;max-width:800px;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 96px rgba(0,0,0,.3);transform:scale(.96);transition:transform .3s}
+#admin-ov.open .admin-panel{transform:scale(1)}
+.admin-hdr{background:var(--black);padding:18px 26px;display:flex;align-items:center;justify-content:space-between}
+.admin-hdr h2{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:white;display:flex;align-items:center;gap:10px}
+.admin-close{background:rgba(255,255,255,.1);border:none;color:white;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.95rem;transition:background .2s;font-family:'Outfit',sans-serif}
+.admin-close:hover{background:var(--red)}
+.admin-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--white);padding:0 26px;overflow-x:auto;gap:0;flex-shrink:0}
+.admin-tab{padding:13px 16px;font-size:.78rem;font-weight:600;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Outfit',sans-serif}
+.admin-tab.active{color:var(--red);border-bottom-color:var(--red)}
+.admin-body{padding:26px;overflow-y:auto;flex:1}
+/* Admin login */
+.admin-login{text-align:center;max-width:320px;margin:0 auto;padding:16px 0}
+.admin-login h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:7px;color:var(--black)}
+.admin-login p{font-size:.8rem;color:var(--text3);margin-bottom:22px;line-height:1.6}
+.admin-err{color:var(--red);font-size:.76rem;margin-top:-6px;margin-bottom:10px;text-align:center;display:none}
+/* Admin fields */
+.admin-sec-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
+.admin-prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+.admin-card{background:var(--beige);border-radius:var(--r2);padding:18px;border:1px solid var(--border)}
+.admin-card h4{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--black);display:flex;align-items:center;gap:7px}
+.admin-field{margin-bottom:11px}
+.admin-field label{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.aselect{padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-size:.82rem;font-family:'Outfit',sans-serif;color:var(--text);background:white;width:100%}
+.aselect:focus{outline:none;border-color:var(--red)}
+.save-bar{background:var(--beige);border-radius:var(--r);padding:13px 17px;display:flex;align-items:center;justify-content:space-between;margin-top:18px;border:1px solid var(--border2);flex-wrap:wrap;gap:10px}
+.save-bar p{font-size:.78rem;color:var(--text3)}
+.btn-save{background:var(--red);color:white;border:none;padding:10px 22px;border-radius:var(--r3);font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.btn-save:hover{background:var(--red2);box-shadow:var(--shadow-red)}
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.stat-card{background:var(--beige);border-radius:var(--r2);padding:16px;border:1px solid var(--border);text-align:center}
+.stat-card .sn{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;color:var(--black)}
+.stat-card .sl{font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);font-weight:600;margin-top:2px}
+.stat-card .sd{font-size:.7rem;margin-top:6px;font-weight:600}
+.sd-up{color:#27ae60}.sd-down{color:var(--red)}
+.chart-wrap{background:var(--beige);border-radius:var(--r2);padding:18px;border:1px solid var(--border);margin-bottom:18px}
+.chart-title{font-family:'Playfair Display',serif;font-size:.86rem;font-weight:700;color:var(--black);margin-bottom:14px}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:110px}
+.bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:3px}
+.bar-fill{width:100%;background:var(--red);border-radius:4px 4px 0 0;opacity:.8;transition:opacity .2s}
+.bar-fill:hover{opacity:1}
+.bar-lbl{font-size:.6rem;color:var(--text3)}
+.bar-val{font-size:.6rem;font-weight:700;color:var(--text2)}
+/* Demand table */
+.dtable{width:100%;border-collapse:collapse}
+.dtable th{font-size:.66rem;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--text3);padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.dtable td{font-size:.8rem;padding:9px 10px;border-bottom:1px dashed var(--border)}
+.dtable tr:last-child td{border-bottom:none}
+.dbadge{display:inline-block;padding:3px 9px;border-radius:var(--r3);font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.db-alta{background:#e8f8ef;color:#27ae60}
+.db-media{background:#fff8e1;color:#f39c12}
+.db-baja{background:var(--red-light);color:var(--red)}
+.export-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn-export{display:flex;align-items:center;gap:6px;padding:9px 16px;border-radius:var(--r);font-size:.76rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;border:1.5px solid var(--border);background:white;color:var(--text2)}
+.btn-export:hover{border-color:var(--red);color:var(--red);background:var(--red-light)}
+/* Clients table */
+.ctable{width:100%;border-collapse:collapse}
+.ctable th{font-size:.66rem;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--text3);padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);background:var(--beige)}
+.ctable td{font-size:.78rem;padding:9px 10px;border-bottom:1px dashed var(--border)}
+.ctable tr:hover td{background:var(--beige)}
+/* Inventory */
+.inv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media(max-width:1024px){
+  .products-grid,.trust-grid{grid-template-columns:1fr 1fr}
+  .ft-top{grid-template-columns:1fr 1fr}
+  .hero-inner{grid-template-columns:1fr;gap:36px}
+  .hero-visual{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .admin-prod-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:white;padding:14px 20px 22px;border-bottom:1px solid var(--border);box-shadow:var(--shadow2);z-index:199;gap:4px}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  .products-grid{grid-template-columns:1fr}
+  .cuts-layout{grid-template-columns:1fr}
+  .del-grid,.ct-grid{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .ft-top{grid-template-columns:1fr}
+  .form-row2{grid-template-columns:1fr}
+  .inv-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .cuts-grid{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .hero-stats{gap:18px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="logo-mark">🐷</div>
+      <div>
+        <div class="logo-name">Puro Chancho Familiar</div>
+        <span class="logo-sub">by J. · Quito, Ecuador 🇪🇨</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#cortes">Cortes</a></li>
+      <li><a href="#entrega">Entrega</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="https://wa.me/593900000000?text=Hola!" target="_blank" class="btn btn-primary nav-cta" style="font-size:.8rem;padding:9px 18px">💬 WhatsApp</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════ ANNOUNCE ══════════════════ -->
+<div class="announce-bar">
+  🔴 <strong>Disponibilidad limitada</strong> · Reserva con anticipación · Ciclos de crianza naturales · Sin intermediarios
+</div>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge"><div class="hero-dot"></div> Criadero familiar · Quito, Ecuador</div>
+        <h1 class="hero-title">Del criadero<br>a tu mesa.<br><em>Puro Chancho.</em></h1>
+        <p class="hero-desc">Lechones, cerdos en pie y cortes frescos. Venta directa del productor sin intermediarios, con el precio real del mercado ecuatoriano.</p>
+        <div class="hero-btns">
+          <a href="#productos" class="btn btn-primary">🐷 Ver productos y precios</a>
+          <a href="https://wa.me/593900000000?text=Hola!+quiero+cotizar" target="_blank" class="btn btn-outline">💬 Cotizar ahora</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-num">100%</div><div class="stat-lbl">Producción propia</div></div>
+          <div><div class="stat-num">3</div><div class="stat-lbl">Productos</div></div>
+          <div><div class="stat-num">Quito</div><div class="stat-lbl">y valles, entrega</div></div>
+        </div>
+      </div>
+      <div class="hero-visual" style="position:relative;padding:24px 30px">
+        <div class="hero-card">
+          <div class="hcard-head">
+            <div class="hcard-title">Productos disponibles</div>
+            <div class="hcard-badge"><div class="dot-g"></div> En stock</div>
+          </div>
+          <div class="hcard-row">
+            <div style="display:flex;align-items:center;gap:10px"><div class="hcard-icon">🐷</div><div><div class="hcard-name">Lechones Tiernos</div><div class="hcard-sub">por unidad · 20–35 lb</div></div></div>
+            <div class="hcard-price">$70–$110</div>
+          </div>
+          <div class="hcard-row">
+            <div style="display:flex;align-items:center;gap:10px"><div class="hcard-icon">🐗</div><div><div class="hcard-name">Cerdo en Pie</div><div class="hcard-sub">por libra · 180–260 lb</div></div></div>
+            <div class="hcard-price">$0.95–$1.20/lb</div>
+          </div>
+          <div class="hcard-row">
+            <div style="display:flex;align-items:center;gap:10px"><div class="hcard-icon">🔪</div><div><div class="hcard-name">Cortes Frescos</div><div class="hcard-sub">por libra · 6 cortes</div></div></div>
+            <div class="hcard-price">$1.50–$3.80/lb</div>
+          </div>
+        </div>
+        <div class="float-badge fb-top"><div class="fb-lbl">Genética</div><div class="fb-val">Landrace × <small>Yorkshire</small></div></div>
+        <div class="float-badge fb-bot"><div class="fb-lbl">Entrega en</div><div class="fb-val">Quito <small>y valles</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PRODUCTS ══════════════════ -->
+<section id="productos" class="section" style="background:var(--white)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">🐷 Nuestros Productos</div>
+      <h2 class="section-title">Calidad directa del <span class="accent">productor</span></h2>
+      <p class="section-sub">Sin intermediarios. Precio justo del mercado ecuatoriano 2025.</p>
+    </div>
+    <div class="products-grid">
+
+      <!-- LECHON -->
+      <div class="prod-card reveal">
+        <div class="prod-thumb">
+          <span class="emo">🐷</span>
+          <div class="avail-tag av" id="lechon-avail-tag"><div class="dot-g"></div><span id="lechon-avail-txt">Disponible</span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">Lechones Tiernos</div>
+          <div class="prod-gen">🧬 <span id="lechon-genetics">Landrace × Yorkshire</span> · ⚖️ 20–35 lb</div>
+          <div class="price-block">
+            <div class="price-nums">$<span id="lp-min">70</span> – $<span id="lp-max">110</span> <span style="font-size:.82rem;font-weight:500">/unidad</span></div>
+            <div class="price-unit">Precio por UNIDAD · Sin cálculo por libra</div>
+            <div class="price-ref">💬 Precio referencial de mercado en Quito y alrededores</div>
+          </div>
+          <div class="reserve-note">📅 Disponibilidad sujeta a ciclos de crianza y faena</div>
+          <span class="calc-lbl">Cantidad de lechones</span>
+          <div class="qty-row">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <div class="qty-num" id="qty-lechon">1</div>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+          <div class="est-box">
+            <div class="est-lbl">Total estimado</div>
+            <div class="est-val" id="est-lechon">$70 – $110</div>
+            <div class="est-note">Confirmado al momento de reserva</div>
+          </div>
+          <button class="btn-wa" onclick="openLechonModal()">🐷 Reservar por WhatsApp</button>
+        </div>
+      </div>
+
+      <!-- CERDO EN PIE -->
+      <div class="prod-card reveal" style="transition-delay:.08s">
+        <div class="prod-thumb">
+          <span class="emo">🐗</span>
+          <div class="avail-tag av" id="pie-avail-tag"><div class="dot-g"></div><span id="pie-avail-txt">Disponible</span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">Cerdo Adulto en Pie</div>
+          <div class="prod-gen">🧬 <span id="pie-genetics">Landrace × Yorkshire</span> · ⚖️ 180–260 lb</div>
+          <div class="price-block">
+            <div class="price-nums">$<span id="pp-min">0.95</span> – $<span id="pp-max">1.20</span> <span style="font-size:.82rem;font-weight:500">/libra</span></div>
+            <div class="price-unit">Precio varía según peso, genética y mercado</div>
+            <div class="price-ref">💬 Precio referencial de mercado en Quito y alrededores</div>
+          </div>
+          <span class="calc-lbl">Peso estimado del animal</span>
+          <div class="range-wrap">
+            <input type="range" min="180" max="260" step="5" value="220" class="rslider" id="sl-pie" oninput="calcPie()" style="background:linear-gradient(to right,var(--red) 0%,var(--red) 50%,var(--border) 50%,var(--border) 100%)">
+          </div>
+          <div class="range-display"><span id="pie-w-val">220 lb</span></div>
+          <div class="est-box">
+            <div class="est-lbl" id="pie-est-lbl">Estimado para 220 lb</div>
+            <div class="est-val" id="est-pie">$209 – $264</div>
+            <div class="est-note">±10% variación normal en ganado</div>
+          </div>
+          <button class="btn-wa" onclick="sendWAPie()">🐗 Consultar por WhatsApp</button>
+        </div>
+      </div>
+
+      <!-- CORTES RESUMEN -->
+      <div class="prod-card reveal" style="transition-delay:.16s">
+        <div class="prod-thumb">
+          <span class="emo">🔪</span>
+          <div class="avail-tag av"><div class="dot-g"></div> Disponible</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">Cortes Frescos</div>
+          <div class="prod-gen">🧬 Landrace × Yorkshire · 6 cortes</div>
+          <div class="price-block">
+            <div class="price-nums">$1.50 – $3.80 <span style="font-size:.82rem;font-weight:500">/libra</span></div>
+            <div class="price-unit">Pierna · Lomo · Costillas · Panceta · Paleta · Cabeza</div>
+            <div class="price-ref">💬 Precio referencial de mercado en Quito y alrededores</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px">
+            <div style="background:var(--beige);border-radius:8px;padding:7px 9px;font-size:.7rem;color:var(--text2)">🦵 Pierna: $2.60–$2.90</div>
+            <div style="background:var(--beige);border-radius:8px;padding:7px 9px;font-size:.7rem;color:var(--text2)">🥩 Lomo: $3.20–$3.80</div>
+            <div style="background:var(--beige);border-radius:8px;padding:7px 9px;font-size:.7rem;color:var(--text2)">🍖 Costillas: $2.80–$3.40</div>
+            <div style="background:var(--beige);border-radius:8px;padding:7px 9px;font-size:.7rem;color:var(--text2)">🥓 Panceta: $2.20–$2.80</div>
+          </div>
+          <a href="#cortes" class="btn-wa btn-wa-sec">🔪 Ver calculadora de cortes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CUTS ══════════════════ -->
+<section id="cortes" class="section cuts-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag red">🔪 Calculadora de Cortes</div>
+      <h2 class="section-title">Elige tu <span class="accent">corte favorito</span></h2>
+      <p class="section-sub">Selecciona el corte, ajusta las libras y obtén el precio estimado al instante.</p>
+    </div>
+    <div class="cuts-layout">
+      <div>
+        <div class="cuts-grid" id="cuts-grid"></div>
+        <div class="price-ref" style="margin-top:4px">💬 Precio referencial de mercado en Quito y alrededores</div>
+      </div>
+      <div>
+        <div class="calc-box">
+          <div class="calc-head">
+            <div class="calc-icon">⚖️</div>
+            <div>
+              <div class="calc-title" id="calc-cut-name">Calculadora de cortes</div>
+              <div class="calc-subtitle" id="calc-cut-price">Selecciona un corte</div>
+            </div>
+          </div>
+          <div id="calc-empty" class="calc-empty">👆 Selecciona un corte de la lista<br>para calcular el precio estimado</div>
+          <div id="calc-active" style="display:none">
+            <span class="calc-lbl">Libras a comprar</span>
+            <div class="range-wrap">
+              <input type="range" min="5" max="50" step="1" value="10" class="rslider" id="cut-slider" oninput="updateCutCalc()" style="background:linear-gradient(to right,var(--red) 0%,var(--red) 37%,var(--border) 37%,var(--border) 100%)">
+            </div>
+            <div class="range-display"><span id="cut-w-val">10 lb</span></div>
+            <div class="est-box">
+              <div class="est-lbl">Estimado para <span id="cut-w-lbl">10 lb</span></div>
+              <div class="est-val" id="cut-est">—</div>
+              <div class="est-note">Peso real puede variar ±10%</div>
+            </div>
+            <button class="btn-wa" onclick="addToCart()" style="margin-bottom:10px">➕ Agregar al pedido</button>
+          </div>
+          <!-- CART -->
+          <div id="cart-area" style="display:none">
+            <div class="cart-area">
+              <div class="cart-title">🛒 Mi pedido</div>
+              <div id="cart-rows"></div>
+              <div class="cart-total">
+                <div><div class="cart-total-lbl">Total estimado</div><div class="cart-total-val" id="cart-total">$0</div></div>
+                <button onclick="clearCart()" style="background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.55);padding:7px 12px;border-radius:8px;cursor:pointer;font-size:.7rem;font-family:'Outfit',sans-serif">Limpiar</button>
+              </div>
+              <div style="margin-top:14px">
+                <div class="form-row2" style="margin-bottom:9px">
+                  <input class="form-input" type="text" id="cli-name" placeholder="Tu nombre">
+                  <input class="form-input" type="text" id="cli-phone" placeholder="+593 9XX XXX">
+                </div>
+                <input class="form-input" type="text" id="cli-addr" placeholder="Sector / barrio (Quito)" style="margin-bottom:12px">
+                <button class="btn-wa" onclick="sendCartWA()">💬 Enviar pedido por WhatsApp</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TRUST ══════════════════ -->
+<section class="section" style="background:var(--white)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">💯 Por qué elegirnos</div>
+      <h2 class="section-title">Venta directa, <span class="accent">sin sorpresas</span></h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal"><div class="trust-icon">🌿</div><div class="trust-title">Alimentación natural</div><p class="trust-desc">Sin hormonas artificiales. Dieta balanceada y controlada desde el nacimiento hasta la entrega.</p></div>
+      <div class="trust-card reveal" style="transition-delay:.07s"><div class="trust-icon">🧬</div><div class="trust-title">Genética seleccionada</div><p class="trust-desc">Cruce Landrace × Yorkshire. Mejor textura, sabor y rendimiento en cada animal.</p></div>
+      <div class="trust-card reveal" style="transition-delay:.14s"><div class="trust-icon">🔒</div><div class="trust-title">Entrega segura</div><p class="trust-desc">Las entregas se coordinan para proteger al cliente y al productor. Ubicación del criadero solo por WhatsApp privado.</p></div>
+      <div class="trust-card reveal" style="transition-delay:.21s"><div class="trust-icon">🤝</div><div class="trust-title">Atención personalizada</div><p class="trust-desc">Coordinamos cada pedido directamente contigo. Respondemos en minutos por WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ DELIVERY ══════════════════ -->
+<section id="entrega" class="section" style="background:var(--beige)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">🚚 Entrega y Pagos</div>
+      <h2 class="section-title">Llegamos a <span class="accent">donde estás</span></h2>
+      <p class="section-sub">Quito y sus valles. Coordinas la entrega directamente por WhatsApp.</p>
+    </div>
+    <div class="del-grid reveal">
+      <div>
+        <div class="del-card">
+          <h3>📍 Zonas de entrega</h3>
+          <div class="zone-row"><div><div class="zone-name">Quito — Norte · Centro · Sur</div><div class="zone-eta">40–60 min estimado</div></div><div class="zone-badge">Coordinado</div></div>
+          <div class="zone-row"><div><div class="zone-name">Cumbayá · Tumbaco</div><div class="zone-eta">25–40 min estimado</div></div><div class="zone-badge">Coordinado</div></div>
+          <div class="zone-row"><div><div class="zone-name">Sangolquí · Los Chillos</div><div class="zone-eta">20–35 min estimado</div></div><div class="zone-badge">Coordinado</div></div>
+          <div class="zone-row"><div><div class="zone-name">Retiro en criadero</div><div class="zone-eta">Coordinar con anticipación</div></div><div class="zone-badge free">Sin costo</div></div>
+          <div class="safe-note">🔒 Las entregas se coordinan de forma segura para proteger al cliente y al productor. La dirección exacta del criadero se comparte únicamente por WhatsApp al confirmar el pedido.</div>
+        </div>
+        <div class="pay-sec" style="margin-top:20px">
+          <div class="pay-title">💳 Métodos de pago</div>
+          <div class="pay-item">🏦 Transferencia bancaria</div>
+          <div class="pay-item">💵 Pago contra entrega (efectivo)</div>
+          <div class="pay-item">📱 Transferencia al momento de entrega</div>
+        </div>
+      </div>
+      <div class="info-list">
+        <div class="info-row"><div class="info-ic">📅</div><div><div class="info-title">Disponibilidad según ciclos de crianza</div><div class="info-body">Disponibilidad sujeta a ciclos de crianza y faena. Reserva anticipada recomendada. No siempre hay stock inmediato.</div></div></div>
+        <div class="info-row"><div class="info-ic">🤝</div><div><div class="info-title">Confirmación directa por WhatsApp</div><div class="info-body">Todo pedido se confirma personalmente. Coordinamos peso exacto, hora y punto de entrega contigo.</div></div></div>
+        <div class="info-row"><div class="info-ic">⚖️</div><div><div class="info-title">Precio final al pesar el animal</div><div class="info-body">El estimado es referencial. El cobro exacto se define al momento de pesar. ±10% de variación es normal en ganado vivo.</div></div></div>
+        <div class="info-row"><div class="info-ic">📋</div><div><div class="info-title">Reservas y preventa disponible</div><div class="info-body">Puedes reservar con anticipación. Confirmamos disponibilidad según el ciclo de producción del criadero.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CONTACT ══════════════════ -->
+<section id="contacto" class="section" style="background:var(--white)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">📞 Contáctanos</div>
+      <h2 class="section-title">Hablemos <span class="accent">directamente</span></h2>
+      <p class="section-sub">La forma más rápida es por WhatsApp. Respondemos en minutos.</p>
+    </div>
+    <div class="ct-grid reveal">
+      <div class="ct-card">
+        <h3>Información de contacto</h3>
+        <div class="ct-method"><div class="ct-icon">📱</div><div><div class="ct-lbl">WhatsApp principal</div><div class="ct-val">+593 9XX XXX XXXX</div></div></div>
+        <div class="ct-method"><div class="ct-icon">📘</div><div><div class="ct-lbl">Facebook</div><div class="ct-val">@PuroChanchoFamiliar</div></div></div>
+        <div class="ct-method"><div class="ct-icon">📸</div><div><div class="ct-lbl">Instagram</div><div class="ct-val">@PuroChanchoFamiliar</div></div></div>
+        <div class="ct-method"><div class="ct-icon">🕐</div><div><div class="ct-lbl">Horario de atención</div><div class="ct-val">Lun–Sáb · 7:00 AM – 6:00 PM</div></div></div>
+        <a href="https://wa.me/593900000000?text=Hola!+Me+interesa+hacer+un+pedido" target="_blank" class="btn-wa-big">💬 Escribir por WhatsApp ahora</a>
+      </div>
+      <div class="ct-card">
+        <h3>Escríbenos directamente</h3>
+        <p style="font-size:.82rem;color:var(--text3);margin-bottom:16px;line-height:1.7">Cuéntanos qué necesitas, cuándo y en qué sector. Te respondemos pronto.</p>
+        <div class="form-group"><input class="form-input" type="text" id="msg-name" placeholder="Tu nombre"></div>
+        <div class="form-group">
+          <select class="form-input" id="msg-product">
+            <option value="">¿Qué producto te interesa?</option>
+            <option>Lechones para asado</option>
+            <option>Cerdo en pie para faena</option>
+            <option>Cortes frescos por partes</option>
+            <option>Tengo otra consulta</option>
+          </select>
+        </div>
+        <div class="form-group"><input class="form-input" type="text" id="msg-sector" placeholder="Sector / barrio (Quito)"></div>
+        <div class="form-group"><textarea class="form-input" id="msg-note" rows="3" placeholder="Detalles: fecha, cantidad, etc." style="resize:vertical"></textarea></div>
+        <button class="btn btn-primary" onclick="sendContactWA()" style="width:100%;justify-content:center;padding:14px">💬 Enviar por WhatsApp</button>
+        <p style="font-size:.68rem;color:var(--text3);text-align:center;margin-top:9px">🔒 Tu información es privada y no se comparte</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="fn">🐷 Puro Chancho Familiar by J.</div>
+        <p>Criadero familiar ecuatoriano con crianza responsable y venta directa del productor, sin intermediarios.</p>
+      </div>
+      <div class="ft-col"><h4>Productos</h4><ul>
+        <li><a href="#productos">Lechones para asado</a></li>
+        <li><a href="#productos">Cerdo en pie</a></li>
+        <li><a href="#cortes">Cortes por partes</a></li>
+      </ul></div>
+      <div class="ft-col"><h4>Información</h4><ul>
+        <li><a href="#entrega">Zonas de entrega</a></li>
+        <li><a href="#entrega">Métodos de pago</a></li>
+        <li><a href="#contacto">Por qué elegirnos</a></li>
+      </ul></div>
+      <div class="ft-col"><h4>Contacto</h4><ul>
+        <li><a href="#contacto">WhatsApp</a></li>
+        <li><a href="https://wa.me/593900000000">Cotizar ahora</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2025 Puro Chancho Familiar by J. · Familia Jácome · Ecuador 🇪🇨</span>
+      <button onclick="openAdmin()" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);padding:5px 14px;border-radius:20px;font-size:.68rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,.4)'">⚙️ Admin</button>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════ WA FLOAT + TOAST ══════════════════ -->
+<a href="https://wa.me/593900000000?text=Hola!" target="_blank" class="wa-float">💬</a>
+<div id="toast"></div>
+
+<!-- ══════════════════ MODAL LECHON ══════════════════ -->
+<div class="modal-ov" id="lechon-modal">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3>🐷 Confirmar reserva</h3>
+    <p class="modal-sub">Revisa tu pedido antes de continuar a WhatsApp</p>
+    <div class="modal-row"><span class="key">Cantidad</span><span class="val" id="modal-qty">1 lechón</span></div>
+    <div class="modal-row"><span class="key">Peso referencial</span><span class="val">20 – 35 lb por unidad</span></div>
+    <div class="modal-row"><span class="key">Tipo de venta</span><span class="val" style="color:var(--red)">Por UNIDAD · No por libra</span></div>
+    <div class="modal-total">
+      <div class="lbl">Total estimado</div>
+      <div class="val" id="modal-total">$70 – $110</div>
+      <div class="note">*Precio final confirmado al momento de entrega</div>
+    </div>
+    <p style="font-size:.72rem;color:var(--text3);margin-bottom:16px;line-height:1.6">⚠️ Precio varía según edad, genética y disponibilidad.</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-confirm" onclick="sendWALechon()">💬 Reservar por WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ ADMIN PANEL ══════════════════ -->
+<div id="admin-ov">
+  <div class="admin-panel" onclick="event.stopPropagation()">
+    <div class="admin-hdr">
+      <h2>⚙️ Panel Administrador</h2>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <!-- LOGIN -->
+    <div id="admin-login-screen" class="admin-body">
+      <div class="admin-login">
+        <h3>Acceso restringido</h3>
+        <p>Ingresa la contraseña del panel de administración.</p>
+        <input class="form-input" type="password" id="admin-pwd" placeholder="Contraseña" style="margin-bottom:10px;text-align:center;letter-spacing:.1em" onkeydown="if(event.key==='Enter')checkPwd()">
+        <div class="admin-err" id="admin-err">Contraseña incorrecta</div>
+        <button class="btn btn-primary" onclick="checkPwd()" style="width:100%;justify-content:center;padding:13px">Ingresar</button>
+      </div>
+    </div>
+    <!-- CONTENT -->
+    <div id="admin-content" style="display:none;flex-direction:column;height:100%;overflow:hidden">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="showTab('products',this)">🐷 Productos</button>
+        <button class="admin-tab" onclick="showTab('stats',this)">📊 Estadísticas</button>
+        <button class="admin-tab" onclick="showTab('clients',this)">👤 Clientes</button>
+        <button class="admin-tab" onclick="showTab('inventory',this)">📦 Inventario</button>
+      </div>
+      <!-- TAB PRODUCTS -->
+      <div class="admin-body" id="tab-products">
+        <div class="admin-sec-title">🐷 Gestión de Productos</div>
+        <div class="admin-prod-grid">
+          <div class="admin-card">
+            <h4>🐷 Lechones Tiernos</h4>
+            <div class="admin-field"><label>Tipo de venta</label><select class="aselect" disabled><option>Por UNIDAD (fijo)</option></select></div>
+            <div class="grid2">
+              <div class="admin-field"><label>Precio mín ($)</label><input class="form-input" type="number" id="adm-lp-min" value="70" min="0"></div>
+              <div class="admin-field"><label>Precio máx ($)</label><input class="form-input" type="number" id="adm-lp-max" value="110" min="0"></div>
+            </div>
+            <div class="admin-field"><label>Genética</label><input class="form-input" type="text" id="adm-lechon-genetics" value="Landrace × Yorkshire"></div>
+            <div class="admin-field"><label>Disponibilidad</label>
+              <select class="aselect" id="adm-lechon-avail">
+                <option value="av">✅ Disponible</option>
+                <option value="rs">🟠 Reservado</option>
+                <option value="sn">⏳ Próximamente</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-card">
+            <h4>🐗 Cerdo Adulto en Pie</h4>
+            <div class="admin-field"><label>Tipo de venta</label><select class="aselect" disabled><option>Por LIBRA (fijo)</option></select></div>
+            <div class="grid2">
+              <div class="admin-field"><label>Precio mín ($/lb)</label><input class="form-input" type="number" step="0.01" id="adm-pp-min" value="0.95"></div>
+              <div class="admin-field"><label>Precio máx ($/lb)</label><input class="form-input" type="number" step="0.01" id="adm-pp-max" value="1.20"></div>
+            </div>
+            <div class="admin-field"><label>Genética</label><input class="form-input" type="text" id="adm-pie-genetics" value="Landrace × Yorkshire"></div>
+            <div class="admin-field"><label>Disponibilidad</label>
+              <select class="aselect" id="adm-pie-avail">
+                <option value="av">✅ Disponible</option>
+                <option value="rs">🟠 Reservado</option>
+                <option value="sn">⏳ Próximamente</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-card" style="grid-column:span 2">
+            <h4>🔪 Cortes — Precios por libra (mín / máx)</h4>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+              <div class="admin-field"><label>Pierna</label><div class="grid2"><input class="form-input" id="c-pierna-min" type="number" step="0.01" value="2.60"><input class="form-input" id="c-pierna-max" type="number" step="0.01" value="2.90"></div></div>
+              <div class="admin-field"><label>Lomo</label><div class="grid2"><input class="form-input" id="c-lomo-min" type="number" step="0.01" value="3.20"><input class="form-input" id="c-lomo-max" type="number" step="0.01" value="3.80"></div></div>
+              <div class="admin-field"><label>Costillas</label><div class="grid2"><input class="form-input" id="c-costilla-min" type="number" step="0.01" value="2.80"><input class="form-input" id="c-costilla-max" type="number" step="0.01" value="3.40"></div></div>
+              <div class="admin-field"><label>Panceta</label><div class="grid2"><input class="form-input" id="c-panceta-min" type="number" step="0.01" value="2.20"><input class="form-input" id="c-panceta-max" type="number" step="0.01" value="2.80"></div></div>
+              <div class="admin-field"><label>Paleta</label><div class="grid2"><input class="form-input" id="c-paleta-min" type="number" step="0.01" value="2.30"><input class="form-input" id="c-paleta-max" type="number" step="0.01" value="2.70"></div></div>
+              <div class="admin-field"><label>Cabeza</label><div class="grid2"><input class="form-input" id="c-cabeza-min" type="number" step="0.01" value="1.50"><input class="form-input" id="c-cabeza-max" type="number" step="0.01" value="2.00"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="save-bar"><p>Los cambios se guardan en el servidor y persisten tras reiniciar.</p><button class="btn-save" onclick="saveProducts()">💾 Guardar cambios</button></div>
+      </div>
+      <!-- TAB STATS -->
+      <div class="admin-body" id="tab-stats" style="display:none">
+        <div class="admin-sec-title">📊 Estadísticas del Negocio</div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="sn" id="stat-consultas">—</div><div class="sl">Clientes registrados</div><div class="sd sd-up">↑ Actualizado en vivo</div></div>
+          <div class="stat-card"><div class="sn">8</div><div class="sl">Lechones reservados</div><div class="sd sd-up">↑ +2 esta semana</div></div>
+          <div class="stat-card"><div class="sn">3</div><div class="sl">Cerdos en pie</div><div class="sd sd-down">↓ stock bajo</div></div>
+          <div class="stat-card"><div class="sn">$1,240</div><div class="sl">Cortes estimados</div><div class="sd sd-up">↑ +$340 mes</div></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Consultas por producto — últimos 6 meses</div>
+          <div class="bar-chart" id="bar-chart"></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">📈 Predicción de demanda — próximos 30 días</div>
+          <table class="dtable">
+            <thead><tr><th>Producto</th><th>Demanda estimada</th><th>Stock recomendado</th><th>Nivel</th></tr></thead>
+            <tbody>
+              <tr><td>🐷 Lechones</td><td>6–10 unidades</td><td>8+ disponibles</td><td><span class="dbadge db-alta">Alta</span></td></tr>
+              <tr><td>🐗 Cerdo en pie</td><td>2–4 animales</td><td>3+ disponibles</td><td><span class="dbadge db-media">Media</span></td></tr>
+              <tr><td>🦵 Pierna/Pernil</td><td>80–120 lb</td><td>Faena semanal</td><td><span class="dbadge db-alta">Alta</span></td></tr>
+              <tr><td>🥓 Panceta</td><td>40–60 lb</td><td>Faena semanal</td><td><span class="dbadge db-media">Media</span></td></tr>
+              <tr><td>🥩 Lomo</td><td>25–40 lb</td><td>Faena semanal</td><td><span class="dbadge db-baja">Baja</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="export-row">
+          <button class="btn-export" onclick="exportCSV()">📄 Exportar CSV</button>
+          <button class="btn-export" onclick="exportReport()">📊 Reporte mensual</button>
+          <button class="btn-export" onclick="window.print()">🖨️ Imprimir</button>
+        </div>
+      </div>
+      <!-- TAB CLIENTS -->
+      <div class="admin-body" id="tab-clients" style="display:none">
+        <div class="admin-sec-title">👤 Registro de Clientes</div>
+        <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+          <input class="form-input" type="text" id="search-clients" placeholder="Buscar cliente..." oninput="filterClients()" style="max-width:260px">
+          <button class="btn-export" onclick="exportCSV()">📄 Exportar CSV</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="ctable">
+            <thead><tr><th>#</th><th>Nombre</th><th>Teléfono</th><th>Sector</th><th>Producto</th><th>Fecha</th></tr></thead>
+            <tbody id="clients-tbody"><tr><td colspan="6" style="text-align:center;color:var(--text3);padding:20px">Cargando clientes del servidor...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- TAB INVENTORY -->
+      <div class="admin-body" id="tab-inventory" style="display:none">
+        <div class="admin-sec-title">📦 Control de Inventario</div>
+        <div class="inv-grid">
+          <div class="admin-card">
+            <h4>🐷 Lechones</h4>
+            <div class="admin-field"><label>Disponibles ahora</label><input class="form-input" type="number" value="4" min="0"></div>
+            <div class="admin-field"><label>Reservados</label><input class="form-input" type="number" value="2" min="0"></div>
+            <div class="admin-field"><label>Próxima disponibilidad</label><input class="form-input" type="date"></div>
+          </div>
+          <div class="admin-card">
+            <h4>🐗 Cerdo en Pie</h4>
+            <div class="admin-field"><label>Disponibles ahora</label><input class="form-input" type="number" value="2" min="0"></div>
+            <div class="admin-field"><label>Reservados</label><input class="form-input" type="number" value="1" min="0"></div>
+            <div class="admin-field"><label>Próxima disponibilidad</label><input class="form-input" type="date"></div>
+          </div>
+          <div class="admin-card">
+            <h4>🔪 Cortes</h4>
+            <div class="admin-field"><label>Estado general</label>
+              <select class="aselect"><option>✅ Disponible</option><option>🟠 Stock limitado</option><option>⏳ Próxima faena</option></select>
+            </div>
+            <div class="admin-field"><label>Próxima faena</label><input class="form-input" type="date"></div>
+            <div class="admin-field"><label>Nota para clientes</label><input class="form-input" type="text" placeholder="ej: Faena jueves"></div>
+          </div>
+        </div>
+        <div class="save-bar"><p>Actualiza el inventario para reflejar disponibilidad real.</p><button class="btn-save" onclick="saveInventory()">💾 Actualizar inventario</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+   JAVASCRIPT — Lógica + Integración con Flask
+═══════════════════════════════════════════════════════════ -->
+<script>
+/* ── VARIABLES GLOBALES ─────────────────────────────────────── */
+const WA = "593900000000";
+const ADMIN_PWD = "chancho2025";
+
+let PRICES = { lMin:70, lMax:110, pMin:0.95, pMax:1.20 };
+
+let CUTS = [
+  {id:"pierna",   name:"Pierna / Pernil", min:2.60, max:2.90, desc:"Favorito para hornado ecuatoriano"},
+  {id:"lomo",     name:"Lomo",            min:3.20, max:3.80, desc:"El corte más tierno · plancha u horno"},
+  {id:"costilla", name:"Costillas",       min:2.80, max:3.40, desc:"Parrilla · horno · en salsa"},
+  {id:"panceta",  name:"Panceta",         min:2.20, max:2.80, desc:"Fritada · tocino · chicharrón"},
+  {id:"paleta",   name:"Paleta",          min:2.30, max:2.70, desc:"Estofados y seco de chancho"},
+  {id:"cabeza",   name:"Cabeza",          min:1.50, max:2.00, desc:"Caldos y chicharrón de cabeza"},
+];
+
+let activeCut = null, cart = [], qtyLechon = 1;
+let allClients = [];
+
+/* ── CUTS GRID ──────────────────────────────────────────────── */
+function buildCutsGrid() {
+  const cg = document.getElementById("cuts-grid");
+  cg.innerHTML = "";
+  CUTS.forEach(c => {
+    const el = document.createElement("div");
+    el.className = "cut-card";
+    el.id = "cut-" + c.id;
+    el.innerHTML = `<div class="cut-chk">✓</div>
+      <div class="cut-name">${c.name}</div>
+      <div class="cut-price">$${c.min.toFixed(2)} – $${c.max.toFixed(2)}/lb</div>
+      <div class="cut-desc">${c.desc}</div>`;
+    el.onclick = () => selectCut(c);
+    cg.appendChild(el);
+  });
+}
+buildCutsGrid();
+
+/* ── CUT SELECTION ──────────────────────────────────────────── */
+function selectCut(c) {
+  activeCut = c;
+  document.querySelectorAll(".cut-card").forEach(e => e.classList.remove("active"));
+  document.getElementById("cut-" + c.id).classList.add("active");
+  document.getElementById("calc-empty").style.display = "none";
+  document.getElementById("calc-active").style.display = "block";
+  document.getElementById("calc-cut-name").textContent = c.name;
+  document.getElementById("calc-cut-price").textContent = "$" + c.min.toFixed(2) + " – $" + c.max.toFixed(2) + " por libra";
+  document.getElementById("cut-slider").value = 10;
+  updateCutCalc();
+}
+
+function updateCutCalc() {
+  if (!activeCut) return;
+  const w = parseInt(document.getElementById("cut-slider").value);
+  document.getElementById("cut-w-val").textContent = w + " lb";
+  document.getElementById("cut-w-lbl").textContent = w + " lb";
+  document.getElementById("cut-est").textContent = "$" + (w * activeCut.min).toFixed(2) + " – $" + (w * activeCut.max).toFixed(2);
+  const pct = ((w - 5) / (50 - 5)) * 100;
+  document.getElementById("cut-slider").style.background =
+    `linear-gradient(to right,var(--red) 0%,var(--red) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
+}
+
+/* ── CART ───────────────────────────────────────────────────── */
+function addToCart() {
+  if (!activeCut) return;
+  const w = parseInt(document.getElementById("cut-slider").value);
+  cart.push({ name: activeCut.name, weight: w, min: activeCut.min, max: activeCut.max, tMin: w * activeCut.min, tMax: w * activeCut.max });
+  renderCart();
+  showToast("✅ " + activeCut.name + " agregado al pedido");
+}
+
+function renderCart() {
+  if (!cart.length) { document.getElementById("cart-area").style.display = "none"; return; }
+  document.getElementById("cart-area").style.display = "block";
+  const tMin = cart.reduce((s, i) => s + i.tMin, 0);
+  const tMax = cart.reduce((s, i) => s + i.tMax, 0);
+  document.getElementById("cart-rows").innerHTML = cart.map((it, i) => `
+    <div class="cart-row">
+      <span class="cart-row-name">${it.name}</span>
+      <span class="cart-row-detail">${it.weight}lb</span>
+      <span class="cart-row-price">$${it.tMin.toFixed(2)}–$${it.tMax.toFixed(2)}</span>
+      <span class="cart-row-del" onclick="rmCart(${i})">✕</span>
+    </div>`).join("");
+  document.getElementById("cart-total").textContent = "$" + tMin.toFixed(2) + " – $" + tMax.toFixed(2);
+}
+
+window.rmCart = i => { cart.splice(i, 1); renderCart(); };
+
+function clearCart() {
+  cart = [];
+  document.getElementById("cart-area").style.display = "none";
+  showToast("🗑️ Pedido limpiado");
+}
+
+/* ── LECHONES ───────────────────────────────────────────────── */
+function changeQty(d) {
+  qtyLechon = Math.max(1, qtyLechon + d);
+  document.getElementById("qty-lechon").textContent = qtyLechon;
+  document.getElementById("est-lechon").textContent = "$" + (PRICES.lMin * qtyLechon) + " – $" + (PRICES.lMax * qtyLechon);
+}
+
+function openLechonModal() {
+  document.getElementById("modal-qty").textContent = qtyLechon + (qtyLechon === 1 ? " lechón" : " lechones");
+  document.getElementById("modal-total").textContent = "$" + (PRICES.lMin * qtyLechon) + " – $" + (PRICES.lMax * qtyLechon);
+  document.getElementById("lechon-modal").classList.add("open");
+}
+
+function closeModal() {
+  document.getElementById("lechon-modal").classList.remove("open");
+}
+
+document.getElementById("lechon-modal").addEventListener("click", function(e) {
+  if (e.target === this) closeModal();
+});
+
+/* ── CERDO EN PIE ───────────────────────────────────────────── */
+function calcPie() {
+  const w = parseInt(document.getElementById("sl-pie").value);
+  document.getElementById("pie-w-val").textContent = w + " lb";
+  document.getElementById("pie-est-lbl").textContent = "Estimado para " + w + " lb";
+  document.getElementById("est-pie").textContent = "$" + (w * PRICES.pMin).toFixed(0) + " – $" + (w * PRICES.pMax).toFixed(0);
+  const pct = ((w - 180) / (260 - 180)) * 100;
+  document.getElementById("sl-pie").style.background =
+    `linear-gradient(to right,var(--red) 0%,var(--red) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
+}
+calcPie();
+
+/* ── NAV ────────────────────────────────────────────────────── */
+function toggleNav() {
+  document.getElementById("nav-links").classList.toggle("open");
+}
+window.addEventListener("scroll", () => {
+  document.getElementById("nav").classList.toggle("scrolled", window.scrollY > 20);
+});
+
+/* ── TOAST ──────────────────────────────────────────────────── */
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3200);
+}
+
+/* ── REVEAL SCROLL ──────────────────────────────────────────── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.1 });
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+/* ── ADMIN ──────────────────────────────────────────────────── */
+function openAdmin() {
+  document.getElementById("admin-ov").classList.add("open");
+  document.getElementById("admin-login-screen").style.display = "block";
+  document.getElementById("admin-content").style.display = "none";
+  document.getElementById("admin-err").style.display = "none";
+  document.getElementById("admin-pwd").value = "";
+  buildBarChart();
+}
+
+function closeAdmin() {
+  document.getElementById("admin-ov").classList.remove("open");
+}
+
+document.getElementById("admin-ov").addEventListener("click", function(e) {
+  if (e.target === this) closeAdmin();
+});
+
+function checkPwd() {
+  if (document.getElementById("admin-pwd").value === ADMIN_PWD) {
+    document.getElementById("admin-login-screen").style.display = "none";
+    document.getElementById("admin-content").style.display = "flex";
+  } else {
+    document.getElementById("admin-err").style.display = "block";
+  }
+}
+
+function showTab(name, btn) {
+  document.querySelectorAll("[id^='tab-']").forEach(t => t.style.display = "none");
+  document.querySelectorAll(".admin-tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + name).style.display = "block";
+  btn.classList.add("active");
+  if (name === "stats") buildBarChart();
+  if (name === "clients") cargarClientesAdmin();
+}
+
+/* ── ADMIN: GUARDAR PRODUCTOS ───────────────────────────────── */
+function saveProducts() {
+  // Actualizar PRICES localmente
+  PRICES.lMin = parseFloat(document.getElementById("adm-lp-min").value) || 70;
+  PRICES.lMax = parseFloat(document.getElementById("adm-lp-max").value) || 110;
+  PRICES.pMin = parseFloat(document.getElementById("adm-pp-min").value) || 0.95;
+  PRICES.pMax = parseFloat(document.getElementById("adm-pp-max").value) || 1.20;
+
+  // Actualizar UI de precios
+  document.getElementById("lp-min").textContent = PRICES.lMin;
+  document.getElementById("lp-max").textContent = PRICES.lMax;
+  document.getElementById("pp-min").textContent = PRICES.pMin;
+  document.getElementById("pp-max").textContent = PRICES.pMax;
+
+  // Actualizar genética
+  document.getElementById("lechon-genetics").textContent = document.getElementById("adm-lechon-genetics").value;
+  document.getElementById("pie-genetics").textContent    = document.getElementById("adm-pie-genetics").value;
+
+  // Actualizar disponibilidad
+  setAvailTag("lechon-avail-tag","lechon-avail-txt", document.getElementById("adm-lechon-avail").value);
+  setAvailTag("pie-avail-tag","pie-avail-txt", document.getElementById("adm-pie-avail").value);
+
+  // Actualizar cortes
+  const campos = ["pierna","lomo","costilla","panceta","paleta","cabeza"];
+  campos.forEach((c, i) => {
+    CUTS[i].min = parseFloat(document.getElementById("c-" + c + "-min").value) || CUTS[i].min;
+    CUTS[i].max = parseFloat(document.getElementById("c-" + c + "-max").value) || CUTS[i].max;
+  });
+  buildCutsGrid();
+  if (activeCut) {
+    const updated = CUTS.find(c => c.id === activeCut.id);
+    if (updated) selectCut(updated);
+  }
+  calcPie();
+
+  // Guardar en servidor Flask
+  guardarPreciosServidor();
+}
+
+function setAvailTag(tagId, txtId, val) {
+  const tag = document.getElementById(tagId);
+  const txt = document.getElementById(txtId);
+  tag.className = "avail-tag";
+  const dot = tag.querySelector("div");
+  if (val === "av") {
+    tag.classList.add("av"); txt.textContent = "Disponible";
+    dot.className = "dot-g";
+  } else if (val === "rs") {
+    tag.classList.add("rs"); txt.textContent = "Reservado";
+    dot.className = "dot-o";
+  } else {
+    tag.classList.add("sn"); txt.textContent = "Próximamente";
+    dot.className = "dot-gr";
+  }
+}
+
+function saveInventory() { showToast("✅ Inventario actualizado"); }
+
+/* ── CHART ──────────────────────────────────────────────────── */
+const barData = [
+  {label:"Ene",v:12},{label:"Feb",v:18},{label:"Mar",v:14},
+  {label:"Abr",v:22},{label:"May",v:19},{label:"Jun",v:24}
+];
+function buildBarChart() {
+  const max = Math.max(...barData.map(d => d.v));
+  document.getElementById("bar-chart").innerHTML = barData.map(d => `
+    <div class="bar-col">
+      <div class="bar-val">${d.v}</div>
+      <div class="bar-fill" style="height:${(d.v/max)*100}%" title="${d.v} consultas"></div>
+      <div class="bar-lbl">${d.label}</div>
+    </div>`).join("");
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INTEGRACIÓN CON FLASK
+══════════════════════════════════════════════════════════════ */
+
+/* ── Cargar precios desde el servidor al iniciar ────────────── */
+async function cargarPrecios() {
+  try {
+    const res  = await fetch('/api/precios');
+    if (!res.ok) return;
+    const data = await res.json();
+
+    PRICES.lMin = data.lechon.min;
+    PRICES.lMax = data.lechon.max;
+    PRICES.pMin = data.pie.min;
+    PRICES.pMax = data.pie.max;
+
+    document.getElementById("lp-min").textContent = data.lechon.min;
+    document.getElementById("lp-max").textContent = data.lechon.max;
+    document.getElementById("pp-min").textContent = data.pie.min;
+    document.getElementById("pp-max").textContent = data.pie.max;
+
+    // Actualizar inputs del admin
+    document.getElementById("adm-lp-min").value = data.lechon.min;
+    document.getElementById("adm-lp-max").value = data.lechon.max;
+    document.getElementById("adm-pp-min").value = data.pie.min;
+    document.getElementById("adm-pp-max").value = data.pie.max;
+
+    const mapa = { pierna:0, lomo:1, costilla:2, panceta:3, paleta:4, cabeza:5 };
+    if (data.cortes) {
+      for (const [nombre, idx] of Object.entries(mapa)) {
+        if (data.cortes[nombre]) {
+          CUTS[idx].min = data.cortes[nombre].min;
+          CUTS[idx].max = data.cortes[nombre].max;
+          document.getElementById("c-" + nombre + "-min").value = data.cortes[nombre].min;
+          document.getElementById("c-" + nombre + "-max").value = data.cortes[nombre].max;
+        }
+      }
+    }
+    buildCutsGrid();
+    calcPie();
+    changeQty(0);
+  } catch (e) {
+    console.log("Usando precios por defecto");
+  }
+}
+
+/* ── Guardar precios en el servidor ─────────────────────────── */
+async function guardarPreciosServidor() {
+  try {
+    const precios = {
+      lechon: { min: PRICES.lMin, max: PRICES.lMax },
+      pie:    { min: PRICES.pMin, max: PRICES.pMax },
+      cortes: {
+        pierna:   { min: parseFloat(document.getElementById("c-pierna-min").value),   max: parseFloat(document.getElementById("c-pierna-max").value) },
+        lomo:     { min: parseFloat(document.getElementById("c-lomo-min").value),     max: parseFloat(document.getElementById("c-lomo-max").value) },
+        costilla: { min: parseFloat(document.getElementById("c-costilla-min").value), max: parseFloat(document.getElementById("c-costilla-max").value) },
+        panceta:  { min: parseFloat(document.getElementById("c-panceta-min").value),  max: parseFloat(document.getElementById("c-panceta-max").value) },
+        paleta:   { min: parseFloat(document.getElementById("c-paleta-min").value),   max: parseFloat(document.getElementById("c-paleta-max").value) },
+        cabeza:   { min: parseFloat(document.getElementById("c-cabeza-min").value),   max: parseFloat(document.getElementById("c-cabeza-max").value) }
+      }
+    };
+    const res = await fetch('/api/precios', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(precios)
+    });
+    if (res.ok) showToast("✅ Cambios guardados en el servidor");
+  } catch (e) {
+    showToast("⚠️ Sin conexión al servidor");
+  }
+}
+
+/* ── Guardar cliente en el servidor ─────────────────────────── */
+async function guardarCliente(nombre, telefono, sector, producto, nota = '') {
+  try {
+    await fetch('/api/cliente', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, telefono, sector, producto, nota })
+    });
+  } catch (e) {
+    console.log("No se pudo guardar cliente");
+  }
+}
+
+/* ── Cargar clientes en el panel admin ──────────────────────── */
+async function cargarClientesAdmin() {
+  try {
+    const res = await fetch('/api/clientes');
+    allClients = await res.json();
+    document.getElementById("stat-consultas").textContent = allClients.length;
+    renderClientsTable(allClients);
+  } catch (e) {
+    document.getElementById("clients-tbody").innerHTML =
+      '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:16px">No se pudo conectar al servidor</td></tr>';
+  }
+}
+
+function renderClientsTable(data) {
+  if (!data.length) {
+    document.getElementById("clients-tbody").innerHTML =
+      '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:16px">No hay clientes registrados aún</td></tr>';
+    return;
+  }
+  document.getElementById("clients-tbody").innerHTML = data.map(c => `
+    <tr>
+      <td>${c.id}</td>
+      <td style="font-weight:600">${c.nombre}</td>
+      <td>${c.telefono || '—'}</td>
+      <td>${c.sector || '—'}</td>
+      <td>${c.producto || '—'}</td>
+      <td>${c.fecha || '—'}</td>
+    </tr>`).join("");
+}
+
+function filterClients() {
+  const q = document.getElementById("search-clients").value.toLowerCase();
+  renderClientsTable(allClients.filter(c =>
+    (c.nombre || '').toLowerCase().includes(q) ||
+    (c.sector || '').toLowerCase().includes(q) ||
+    (c.producto || '').toLowerCase().includes(q)
+  ));
+}
+
+/* ── Exportar CSV ───────────────────────────────────────────── */
+function exportCSV() {
+  if (!allClients.length) { showToast("⚠️ Sin datos para exportar"); return; }
+  const cols = ["id","nombre","telefono","sector","producto","nota","fecha"];
+  const header = cols.join(",");
+  const rows = allClients.map(c => cols.map(k => `"${(c[k]||'').toString().replace(/"/g,'""')}"`).join(","));
+  const csv = [header, ...rows].join("\n");
+  const a = document.createElement("a");
+  a.href = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+  a.download = "puro_chancho_clientes.csv";
+  a.click();
+  showToast("📄 CSV exportado correctamente");
+}
+
+function exportReport() { showToast("📊 Reporte en desarrollo"); }
+
+/* ── WhatsApp: Lechones ─────────────────────────────────────── */
+function sendWALechon() {
+  const q = qtyLechon;
+  const msg = `Hola! Me interesa reservar *${q} lechón${q===1?'':'es'} para asado*.\n\n` +
+    `💰 Total estimado: $${PRICES.lMin*q} – $${PRICES.lMax*q}\n` +
+    `⚖️ Peso aprox: 20–35 lb por unidad\n\n` +
+    `¿Cuándo tienen disponibilidad?`;
+  guardarCliente("WhatsApp", "", "", "Lechones x" + q);
+  closeModal();
+  window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+}
+
+/* ── WhatsApp: Cerdo en pie ─────────────────────────────────── */
+function sendWAPie() {
+  const w = document.getElementById("sl-pie").value;
+  const msg = `Hola! Me interesa un *cerdo en pie para faena*.\n\n` +
+    `⚖️ Peso estimado: ${w} lb\n` +
+    `💰 Estimado: $${(w*PRICES.pMin).toFixed(0)}–$${(w*PRICES.pMax).toFixed(0)}\n\n` +
+    `¿Tienen disponibilidad?`;
+  guardarCliente("WhatsApp", "", "", "Cerdo en pie " + w + "lb");
+  window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+}
+
+/* ── WhatsApp: Carrito de cortes ────────────────────────────── */
+function sendCartWA() {
+  if (!cart.length) { showToast("⚠️ Agrega al menos un corte"); return; }
+  const nombre   = document.getElementById("cli-name").value  || "Cliente";
+  const telefono = document.getElementById("cli-phone").value || "";
+  const sector   = document.getElementById("cli-addr").value  || "No indicada";
+  const tMin = cart.reduce((s, i) => s + i.tMin, 0);
+  const tMax = cart.reduce((s, i) => s + i.tMax, 0);
+  let msg = `Hola! Soy ${nombre}.\n\n🔪 *Pedido de cortes:*\n`;
+  cart.forEach(it => msg += `• ${it.name}: ${it.weight} lb → $${it.tMin.toFixed(2)}–$${it.tMax.toFixed(2)}\n`);
+  msg += `\n💵 *Total estimado: $${tMin.toFixed(2)}–$${tMax.toFixed(2)}*\n` +
+    `📍 Sector: ${sector}\n📱 WhatsApp: ${telefono}\n\n⚠️ Peso real puede variar ±10%.`;
+  guardarCliente(nombre, telefono, sector, "Cortes");
+  window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+}
+
+/* ── WhatsApp: Formulario de contacto ───────────────────────── */
+function sendContactWA() {
+  const nombre   = document.getElementById("msg-name").value    || "Cliente";
+  const producto = document.getElementById("msg-product").value || "No especificado";
+  const sector   = document.getElementById("msg-sector").value  || "No indicado";
+  const nota     = document.getElementById("msg-note").value    || "";
+  const msg = `Hola! Soy ${nombre}.\n\n🐷 *Producto:* ${producto}\n📍 *Sector:* ${sector}\n💬 *Detalles:* ${nota}`;
+  guardarCliente(nombre, "", sector, producto, nota);
+  window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+}
+
+/* ── INICIALIZAR AL CARGAR ──────────────────────────────────── */
+document.addEventListener("DOMContentLoaded", cargarPrecios);
+</script>
+</body>
+</html>
