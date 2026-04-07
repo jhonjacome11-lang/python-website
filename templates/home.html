@@ -5,11 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Puro Chancho Familiar by J. | Venta directa · Quito, Ecuador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════════════════
-   TOKENS & RESET
-═══════════════════════════════════════════════════════════ */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 :root{
@@ -33,9 +30,6 @@ html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--text);-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 
-/* ═══════════════════════════════════════════════════════════
-   LAYOUT UTILITIES
-═══════════════════════════════════════════════════════════ */
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 .section{padding:80px 0}
 .section-head{text-align:center;margin-bottom:52px}
@@ -47,18 +41,13 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
 .reveal.visible{opacity:1;transform:none}
 
-/* ═══════════════════════════════════════════════════════════
-   BUTTONS
-═══════════════════════════════════════════════════════════ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Outfit',sans-serif;font-weight:600;border:none;cursor:pointer;transition:all .22s;text-decoration:none}
 .btn-primary{background:var(--red);color:white;padding:15px 30px;border-radius:var(--r3);font-size:.95rem;box-shadow:var(--shadow-red)}
 .btn-primary:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(192,57,43,.38)}
 .btn-outline{background:var(--white);color:var(--black);padding:14px 24px;border-radius:var(--r3);font-size:.9rem;border:1.5px solid var(--border2)}
 .btn-outline:hover{border-color:var(--red);color:var(--red)}
 
-/* ═══════════════════════════════════════════════════════════
-   NAV
-═══════════════════════════════════════════════════════════ */
+/* NAV */
 #nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
 #nav.scrolled{box-shadow:var(--shadow)}
 .nav-inner{max-width:1160px;margin:0 auto;padding:0 24px;height:66px;display:flex;align-items:center;justify-content:space-between}
@@ -74,31 +63,30 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
 .hamburger span{width:22px;height:2px;background:var(--black);border-radius:2px;display:block}
 
-/* ═══════════════════════════════════════════════════════════
-   ANNOUNCE BAR
-═══════════════════════════════════════════════════════════ */
+/* ANNOUNCE */
 .announce-bar{background:var(--red);color:white;text-align:center;padding:11px 24px;font-size:.8rem;font-weight:500;margin-top:66px}
 .announce-bar strong{font-weight:700}
 
-/* ═══════════════════════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════════════════════ */
-#hero{min-height:90vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--white)}
-.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;opacity:.3;pointer-events:none}
-.hero-glow{position:absolute;right:-200px;top:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.07) 0%,transparent 70%);pointer-events:none}
+/* HERO con imagen de fondo */
+#hero{min-height:92vh;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background-image:url("{{ url_for('static', filename='images/criadero-exterior.jpg') }}");background-size:cover;background-position:center;filter:brightness(.45)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(20,10,5,.75) 0%,rgba(192,57,43,.25) 100%)}
 .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:2;padding:80px 0 60px}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);background:var(--white);padding:7px 16px;border-radius:var(--r3);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);margin-bottom:22px}
-.hero-dot{width:7px;height:7px;background:#27ae60;border-radius:50%;animation:pdot 2s infinite;flex-shrink:0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);backdrop-filter:blur(8px);padding:7px 16px;border-radius:var(--r3);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:22px}
+.hero-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:pdot 2s infinite;flex-shrink:0}
 @keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
-.hero-title{font-size:clamp(2.3rem,5vw,4rem);font-weight:900;color:var(--black);line-height:1.05;margin-bottom:20px}
-.hero-title em{color:var(--red);font-style:italic}
-.hero-desc{font-size:1.02rem;color:var(--text2);line-height:1.78;margin-bottom:36px;font-weight:300;max-width:460px}
+.hero-title{font-size:clamp(2.4rem,5vw,4.2rem);font-weight:900;color:white;line-height:1.05;margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.hero-title em{color:#fbbf24;font-style:italic}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,.82);line-height:1.78;margin-bottom:36px;font-weight:300;max-width:460px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
+.hero-btns .btn-outline{border-color:rgba(255,255,255,.4);color:white;background:rgba(255,255,255,.1);backdrop-filter:blur(8px)}
+.hero-btns .btn-outline:hover{border-color:white;background:rgba(255,255,255,.2)}
 .hero-stats{display:flex;gap:28px;flex-wrap:wrap}
-.stat-num{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--black)}
-.stat-lbl{font-size:.7rem;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:white}
+.stat-lbl{font-size:.7rem;color:rgba(255,255,255,.6);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+
 /* Hero card */
-.hero-card{background:var(--white);border-radius:var(--r2);padding:26px;box-shadow:var(--shadow2);border:1px solid var(--border);position:relative}
+.hero-card{background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-radius:var(--r2);padding:26px;box-shadow:0 20px 60px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.5);position:relative}
 .hcard-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .hcard-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--black)}
 .hcard-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r3);background:#e8f8ef;color:#27ae60;display:flex;align-items:center;gap:5px}
@@ -115,14 +103,27 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 .fb-val{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;color:var(--black)}
 .fb-val small{font-size:.65rem;color:var(--text3);font-family:'Outfit',sans-serif;font-weight:400}
 
-/* ═══════════════════════════════════════════════════════════
-   PRODUCTS
-═══════════════════════════════════════════════════════════ */
+/* GALERÍA */
+.gallery-section{background:var(--black);padding:60px 0}
+.gallery-title-wrap{text-align:center;margin-bottom:36px}
+.gallery-title-wrap h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:white;font-weight:900;margin-bottom:8px}
+.gallery-title-wrap p{color:rgba(255,255,255,.45);font-size:.88rem}
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:8px}
+.gallery-item{position:relative;overflow:hidden;border-radius:var(--r);cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item.featured{grid-row:span 2}
+.gallery-label{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:white;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;transform:translateY(100%);transition:transform .3s}
+.gallery-item:hover .gallery-label{transform:translateY(0)}
+
+/* PRODUCTS */
 .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .prod-card{background:var(--white);border-radius:var(--r2);border:1px solid var(--border);overflow:hidden;transition:all .3s;box-shadow:var(--shadow)}
 .prod-card:hover{transform:translateY(-4px);box-shadow:var(--shadow2)}
-.prod-thumb{height:196px;position:relative;display:flex;align-items:center;justify-content:center;background:var(--beige);overflow:hidden}
-.prod-thumb .emo{font-size:5rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,.1))}
+.prod-thumb{height:220px;position:relative;overflow:hidden}
+.prod-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.prod-card:hover .prod-thumb img{transform:scale(1.05)}
+.prod-thumb-overlay{position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.4))}
 .avail-tag{position:absolute;top:12px;left:12px;font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 11px;border-radius:var(--r3);display:flex;align-items:center;gap:5px;background:white;box-shadow:var(--shadow)}
 .avail-tag.av{color:#27ae60}.avail-tag.rs{color:#e67e22;background:#fff8f0}.avail-tag.sn{color:var(--text3);background:var(--beige)}
 .dot-g{width:6px;height:6px;background:#27ae60;border-radius:50%;animation:pdot 2s infinite;flex-shrink:0}
@@ -154,28 +155,43 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 .btn-wa-sec{background:var(--white);color:var(--red);border:1.5px solid var(--red)}
 .btn-wa-sec:hover{background:var(--red-light)}
 
-/* ═══════════════════════════════════════════════════════════
-   CUTS SECTION
-═══════════════════════════════════════════════════════════ */
-.cuts-bg{background:var(--beige)}
+/* NOSOTROS */
+.nosotros-section{background:var(--beige);padding:80px 0}
+.nosotros-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.nosotros-img-wrap{position:relative;border-radius:var(--r2);overflow:hidden;box-shadow:var(--shadow2)}
+.nosotros-img-wrap img{width:100%;height:480px;object-fit:cover}
+.nosotros-badge{position:absolute;bottom:24px;left:24px;background:white;border-radius:var(--r2);padding:14px 18px;box-shadow:var(--shadow2)}
+.nosotros-badge .nb-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--red)}
+.nosotros-badge .nb-lbl{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.nosotros-content h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--black);margin-bottom:16px;line-height:1.1}
+.nosotros-content p{font-size:.95rem;color:var(--text2);line-height:1.8;margin-bottom:20px}
+.feature-list{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.feature-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:white;border-radius:var(--r2);border:1px solid var(--border)}
+.feature-icon{width:42px;height:42px;background:var(--red-light);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.feature-title{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--black);margin-bottom:3px}
+.feature-desc{font-size:.76rem;color:var(--text3);line-height:1.6}
+
+/* CUTS */
+.cuts-bg{background:var(--white)}
 .cuts-layout{display:grid;grid-template-columns:3fr 2fr;gap:28px;align-items:start}
 .cuts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
-.cut-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:14px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden}
-.cut-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transition:transform .2s;transform-origin:bottom}
-.cut-card:hover::before,.cut-card.active::before{transform:scaleY(1)}
-.cut-card:hover,.cut-card.active{border-color:var(--red);background:var(--red-light);transform:translateY(-2px)}
-.cut-chk{position:absolute;top:8px;right:8px;width:18px;height:18px;background:var(--red);border-radius:50%;display:none;align-items:center;justify-content:center;color:white;font-size:.58rem}
+.cut-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all .22s;position:relative}
+.cut-card:hover,.cut-card.active{border-color:var(--red);transform:translateY(-2px);box-shadow:var(--shadow)}
+.cut-img{height:110px;overflow:hidden}
+.cut-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.cut-card:hover .cut-img img{transform:scale(1.07)}
+.cut-body{padding:10px 12px}
+.cut-chk{position:absolute;top:8px;right:8px;width:20px;height:20px;background:var(--red);border-radius:50%;display:none;align-items:center;justify-content:center;color:white;font-size:.65rem;box-shadow:0 2px 8px rgba(192,57,43,.4)}
 .cut-card.active .cut-chk{display:flex}
-.cut-name{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;color:var(--black);margin-bottom:2px}
-.cut-price{font-size:.76rem;font-weight:700;color:var(--red)}
-.cut-desc{font-size:.67rem;color:var(--text3);margin-top:3px}
-.calc-box{background:var(--white);border-radius:var(--r2);padding:24px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.cut-name{font-family:'Playfair Display',serif;font-size:.82rem;font-weight:700;color:var(--black);margin-bottom:2px}
+.cut-price{font-size:.72rem;font-weight:700;color:var(--red)}
+.cut-desc{font-size:.64rem;color:var(--text3);margin-top:2px}
+.calc-box{background:var(--white);border-radius:var(--r2);padding:24px;box-shadow:var(--shadow);border:1px solid var(--border);position:sticky;top:86px}
 .calc-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border)}
 .calc-icon{width:40px;height:40px;background:var(--red-light);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
 .calc-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black)}
 .calc-subtitle{font-size:.72rem;color:var(--red);font-weight:600}
 .calc-empty{text-align:center;color:var(--text3);font-size:.86rem;padding:28px 0;line-height:1.7}
-/* Cart */
 .cart-area{margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
 .cart-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black);margin-bottom:10px}
 .cart-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--border);font-size:.8rem;gap:6px}
@@ -191,9 +207,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 .form-input:focus{outline:none;border-color:var(--red)}
 .form-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-/* ═══════════════════════════════════════════════════════════
-   TRUST
-═══════════════════════════════════════════════════════════ */
+/* TRUST */
 .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .trust-card{border-radius:var(--r2);padding:26px 20px;border:1px solid var(--border);transition:all .3s;background:var(--white)}
 .trust-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:var(--red)}
@@ -201,9 +215,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 .trust-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black);margin-bottom:7px}
 .trust-desc{font-size:.78rem;color:var(--text3);line-height:1.7}
 
-/* ═══════════════════════════════════════════════════════════
-   DELIVERY
-═══════════════════════════════════════════════════════════ */
+/* DELIVERY */
 .del-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
 .del-card{background:var(--black);border-radius:var(--r2);padding:30px;color:white}
 .del-card h3{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;margin-bottom:18px}
@@ -223,9 +235,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 .info-title{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;color:var(--black);margin-bottom:4px}
 .info-body{font-size:.76rem;color:var(--text3);line-height:1.65}
 
-/* ═══════════════════════════════════════════════════════════
-   CONTACT
-═══════════════════════════════════════════════════════════ */
+/* CONTACT */
 .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .ct-card{background:var(--white);border-radius:var(--r2);padding:30px;border:1px solid var(--border);box-shadow:var(--shadow)}
 .ct-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--black);margin-bottom:18px}
@@ -239,9 +249,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
 .form-group{margin-bottom:10px}
 select.form-input{color:var(--text)}
 
-/* ═══════════════════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════════════════ */
+/* FOOTER */
 footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px}
 .ft-inner{max-width:1160px;margin:0 auto}
 .ft-top{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:22px}
@@ -254,18 +262,14 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
 .ft-col a:hover{color:var(--red)}
 .ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.72rem}
 
-/* ═══════════════════════════════════════════════════════════
-   WA FLOAT + TOAST
-═══════════════════════════════════════════════════════════ */
+/* WA FLOAT + TOAST */
 .wa-float{position:fixed;bottom:24px;right:24px;z-index:300;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .2s;animation:wap 3s infinite}
 @keyframes wap{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5)}50%{box-shadow:0 4px 32px rgba(37,211,102,.75)}}
 .wa-float:hover{transform:scale(1.08)}
 #toast{position:fixed;bottom:94px;right:24px;background:var(--black);color:white;padding:11px 17px;border-radius:var(--r);font-size:.8rem;z-index:999;transform:translateY(60px);opacity:0;transition:all .32s;pointer-events:none;box-shadow:var(--shadow2);max-width:260px;border-left:3px solid var(--red)}
 #toast.show{transform:translateY(0);opacity:1}
 
-/* ═══════════════════════════════════════════════════════════
-   MODAL LECHON
-═══════════════════════════════════════════════════════════ */
+/* MODAL */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-ov.open{opacity:1;pointer-events:all}
 .modal-box{background:white;border-radius:var(--r2);padding:30px;max-width:440px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,.25);transform:translateY(22px);transition:transform .3s}
@@ -285,9 +289,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
 .btn-confirm{background:#25D366;color:white}
 .btn-confirm:hover{background:#1eae56}
 
-/* ═══════════════════════════════════════════════════════════
-   ADMIN PANEL
-═══════════════════════════════════════════════════════════ */
+/* ADMIN */
 #admin-ov{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}
 #admin-ov.open{opacity:1;pointer-events:all}
 .admin-panel{background:white;border-radius:var(--r2);width:100%;max-width:800px;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 96px rgba(0,0,0,.3);transform:scale(.96);transition:transform .3s}
@@ -300,12 +302,10 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
 .admin-tab{padding:13px 16px;font-size:.78rem;font-weight:600;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Outfit',sans-serif}
 .admin-tab.active{color:var(--red);border-bottom-color:var(--red)}
 .admin-body{padding:26px;overflow-y:auto;flex:1}
-/* Admin login */
 .admin-login{text-align:center;max-width:320px;margin:0 auto;padding:16px 0}
 .admin-login h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:7px;color:var(--black)}
 .admin-login p{font-size:.8rem;color:var(--text3);margin-bottom:22px;line-height:1.6}
 .admin-err{color:var(--red);font-size:.76rem;margin-top:-6px;margin-bottom:10px;text-align:center;display:none}
-/* Admin fields */
 .admin-sec-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--black);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
 .admin-prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
 .admin-card{background:var(--beige);border-radius:var(--r2);padding:18px;border:1px solid var(--border)}
@@ -319,7 +319,6 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
 .save-bar p{font-size:.78rem;color:var(--text3)}
 .btn-save{background:var(--red);color:white;border:none;padding:10px 22px;border-radius:var(--r3);font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
 .btn-save:hover{background:var(--red2);box-shadow:var(--shadow-red)}
-/* Stats */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
 .stat-card{background:var(--beige);border-radius:var(--r2);padding:16px;border:1px solid var(--border);text-align:center}
 .stat-card .sn{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;color:var(--black)}
@@ -334,7 +333,6 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
 .bar-fill:hover{opacity:1}
 .bar-lbl{font-size:.6rem;color:var(--text3)}
 .bar-val{font-size:.6rem;font-weight:700;color:var(--text2)}
-/* Demand table */
 .dtable{width:100%;border-collapse:collapse}
 .dtable th{font-size:.66rem;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--text3);padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
 .dtable td{font-size:.8rem;padding:9px 10px;border-bottom:1px dashed var(--border)}
@@ -346,17 +344,13 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
 .export-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 .btn-export{display:flex;align-items:center;gap:6px;padding:9px 16px;border-radius:var(--r);font-size:.76rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;border:1.5px solid var(--border);background:white;color:var(--text2)}
 .btn-export:hover{border-color:var(--red);color:var(--red);background:var(--red-light)}
-/* Clients table */
 .ctable{width:100%;border-collapse:collapse}
 .ctable th{font-size:.66rem;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--text3);padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);background:var(--beige)}
 .ctable td{font-size:.78rem;padding:9px 10px;border-bottom:1px dashed var(--border)}
 .ctable tr:hover td{background:var(--beige)}
-/* Inventory */
 .inv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
 
-/* ═══════════════════════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════════════════════ */
+/* RESPONSIVE */
 @media(max-width:1024px){
   .products-grid,.trust-grid{grid-template-columns:1fr 1fr}
   .ft-top{grid-template-columns:1fr 1fr}
@@ -364,6 +358,9 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   .hero-visual{display:none}
   .stats-grid{grid-template-columns:1fr 1fr}
   .admin-prod-grid{grid-template-columns:1fr}
+  .nosotros-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gallery-item.featured{grid-row:span 1}
 }
 @media(max-width:768px){
   .nav-links{display:none;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:white;padding:14px 20px 22px;border-bottom:1px solid var(--border);box-shadow:var(--shadow2);z-index:199;gap:4px}
@@ -377,19 +374,21 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   .form-row2{grid-template-columns:1fr}
   .inv-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .cuts-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:480px){
-  .cuts-grid{grid-template-columns:1fr 1fr}
   .trust-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:1fr}
   .hero-btns{flex-direction:column;align-items:stretch}
   .hero-stats{gap:18px}
+  .gallery-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════ NAV ══════════════════ -->
+<!-- NAV -->
 <nav id="nav">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
@@ -401,10 +400,11 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
     </a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#productos">Productos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#cortes">Cortes</a></li>
       <li><a href="#entrega">Entrega</a></li>
       <li><a href="#contacto">Contacto</a></li>
-      <li><a href="https://wa.me/593900000000?text=Hola!" target="_blank" class="btn btn-primary nav-cta" style="font-size:.8rem;padding:9px 18px">💬 WhatsApp</a></li>
+      <li><a href="https://wa.me/593980108244?text=Hola!" target="_blank" class="btn btn-primary nav-cta" style="font-size:.8rem;padding:9px 18px">💬 WhatsApp</a></li>
     </ul>
     <button class="hamburger" onclick="toggleNav()">
       <span></span><span></span><span></span>
@@ -412,15 +412,15 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   </div>
 </nav>
 
-<!-- ══════════════════ ANNOUNCE ══════════════════ -->
+<!-- ANNOUNCE -->
 <div class="announce-bar">
-  🔴 <strong>Disponibilidad limitada</strong> · Reserva con anticipación · Ciclos de crianza naturales · Sin intermediarios
+  🔴 <strong>Disponibilidad limitada</strong> · Reserva con anticipación · Crianza natural · Sin intermediarios
 </div>
 
-<!-- ══════════════════ HERO ══════════════════ -->
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="wrap">
     <div class="hero-inner">
       <div>
@@ -429,7 +429,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
         <p class="hero-desc">Lechones, cerdos en pie y cortes frescos. Venta directa del productor sin intermediarios, con el precio real del mercado ecuatoriano.</p>
         <div class="hero-btns">
           <a href="#productos" class="btn btn-primary">🐷 Ver productos y precios</a>
-          <a href="https://wa.me/593900000000?text=Hola!+quiero+cotizar" target="_blank" class="btn btn-outline">💬 Cotizar ahora</a>
+          <a href="https://wa.me/593980108244?text=Hola!+quiero+cotizar" target="_blank" class="btn btn-outline">💬 Cotizar ahora</a>
         </div>
         <div class="hero-stats">
           <div><div class="stat-num">100%</div><div class="stat-lbl">Producción propia</div></div>
@@ -463,7 +463,47 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   </div>
 </section>
 
-<!-- ══════════════════ PRODUCTS ══════════════════ -->
+<!-- GALERÍA -->
+<section class="gallery-section">
+  <div class="wrap">
+    <div class="gallery-title-wrap reveal">
+      <h2>📸 Nuestro Criadero</h2>
+      <p>Fotos reales de nuestras instalaciones y animales en Quito, Ecuador</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item featured">
+        <img src="{{ url_for('static', filename='images/criadero-exterior.jpg') }}" alt="Instalaciones del criadero">
+        <div class="gallery-label">Instalaciones del Criadero</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='images/cerda-lechones.jpg') }}" alt="Madre con lechones">
+        <div class="gallery-label">Madre con Lechones</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='images/cerdos-corral.jpg') }}" alt="Cerdos en corral">
+        <div class="gallery-label">Cerdos en Corral</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='images/cerdos-adultos.jpg') }}" alt="Nuestros cerdos">
+        <div class="gallery-label">Nuestros Cerdos</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='images/lechones-grupo.jpg') }}" alt="Lechones en crecimiento">
+        <div class="gallery-label">Lechones en Crecimiento</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='images/cerdos-asomados.jpg') }}" alt="Raza Landrace x Yorkshire">
+        <div class="gallery-label">Raza Landrace × Yorkshire</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='images/cerdo-grande.jpg') }}" alt="Cerdo adulto listo">
+        <div class="gallery-label">Cerdo Adulto Listo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
 <section id="productos" class="section" style="background:var(--white)">
   <div class="wrap">
     <div class="section-head reveal">
@@ -472,11 +512,11 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
       <p class="section-sub">Sin intermediarios. Precio justo del mercado ecuatoriano 2025.</p>
     </div>
     <div class="products-grid">
-
       <!-- LECHON -->
       <div class="prod-card reveal">
         <div class="prod-thumb">
-          <span class="emo">🐷</span>
+          <img src="{{ url_for('static', filename='images/cerda-lechones.jpg') }}" alt="Lechones tiernos">
+          <div class="prod-thumb-overlay"></div>
           <div class="avail-tag av" id="lechon-avail-tag"><div class="dot-g"></div><span id="lechon-avail-txt">Disponible</span></div>
         </div>
         <div class="prod-body">
@@ -485,9 +525,9 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
           <div class="price-block">
             <div class="price-nums">$<span id="lp-min">70</span> – $<span id="lp-max">110</span> <span style="font-size:.82rem;font-weight:500">/unidad</span></div>
             <div class="price-unit">Precio por UNIDAD · Sin cálculo por libra</div>
-            <div class="price-ref">💬 Precio referencial de mercado en Quito y alrededores</div>
+            <div class="price-ref">💬 Precio referencial mercado Quito</div>
           </div>
-          <div class="reserve-note">📅 Disponibilidad sujeta a ciclos de crianza y faena</div>
+          <div class="reserve-note">📅 Disponibilidad sujeta a ciclos de crianza</div>
           <span class="calc-lbl">Cantidad de lechones</span>
           <div class="qty-row">
             <button class="qty-btn" onclick="changeQty(-1)">−</button>
@@ -502,11 +542,11 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
           <button class="btn-wa" onclick="openLechonModal()">🐷 Reservar por WhatsApp</button>
         </div>
       </div>
-
       <!-- CERDO EN PIE -->
       <div class="prod-card reveal" style="transition-delay:.08s">
         <div class="prod-thumb">
-          <span class="emo">🐗</span>
+          <img src="{{ url_for('static', filename='images/cerdo-grande.jpg') }}" alt="Cerdo adulto en pie">
+          <div class="prod-thumb-overlay"></div>
           <div class="avail-tag av" id="pie-avail-tag"><div class="dot-g"></div><span id="pie-avail-txt">Disponible</span></div>
         </div>
         <div class="prod-body">
@@ -514,8 +554,8 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
           <div class="prod-gen">🧬 <span id="pie-genetics">Landrace × Yorkshire</span> · ⚖️ 180–260 lb</div>
           <div class="price-block">
             <div class="price-nums">$<span id="pp-min">0.95</span> – $<span id="pp-max">1.20</span> <span style="font-size:.82rem;font-weight:500">/libra</span></div>
-            <div class="price-unit">Precio varía según peso, genética y mercado</div>
-            <div class="price-ref">💬 Precio referencial de mercado en Quito y alrededores</div>
+            <div class="price-unit">Precio varía según peso y genética</div>
+            <div class="price-ref">💬 Precio referencial mercado Quito</div>
           </div>
           <span class="calc-lbl">Peso estimado del animal</span>
           <div class="range-wrap">
@@ -530,11 +570,11 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
           <button class="btn-wa" onclick="sendWAPie()">🐗 Consultar por WhatsApp</button>
         </div>
       </div>
-
-      <!-- CORTES RESUMEN -->
+      <!-- CORTES -->
       <div class="prod-card reveal" style="transition-delay:.16s">
         <div class="prod-thumb">
-          <span class="emo">🔪</span>
+          <img src="{{ url_for('static', filename='images/corte-pierna.jpg') }}" alt="Cortes frescos de cerdo">
+          <div class="prod-thumb-overlay"></div>
           <div class="avail-tag av"><div class="dot-g"></div> Disponible</div>
         </div>
         <div class="prod-body">
@@ -543,7 +583,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
           <div class="price-block">
             <div class="price-nums">$1.50 – $3.80 <span style="font-size:.82rem;font-weight:500">/libra</span></div>
             <div class="price-unit">Pierna · Lomo · Costillas · Panceta · Paleta · Cabeza</div>
-            <div class="price-ref">💬 Precio referencial de mercado en Quito y alrededores</div>
+            <div class="price-ref">💬 Precio referencial mercado Quito</div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px">
             <div style="background:var(--beige);border-radius:8px;padding:7px 9px;font-size:.7rem;color:var(--text2)">🦵 Pierna: $2.60–$2.90</div>
@@ -558,7 +598,51 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   </div>
 </section>
 
-<!-- ══════════════════ CUTS ══════════════════ -->
+<!-- NOSOTROS -->
+<section id="nosotros" class="nosotros-section">
+  <div class="wrap">
+    <div class="nosotros-grid reveal">
+      <div class="nosotros-img-wrap">
+        <img src="{{ url_for('static', filename='images/cerdos-adultos.jpg') }}" alt="Nuestro criadero familiar">
+        <div class="nosotros-badge">
+          <div class="nb-num">100%</div>
+          <div class="nb-lbl">Producción Propia</div>
+        </div>
+      </div>
+      <div class="nosotros-content">
+        <div class="tag" style="margin-bottom:14px">🏡 Quiénes somos</div>
+        <h2>Criadero <em style="color:var(--red)">Jácome</em><br>Familia ecuatoriana</h2>
+        <p>Somos una familia criadora con años de experiencia en la producción de cerdos de alta calidad en los alrededores de Quito. Nuestra misión es llevar carne fresca directamente del criadero a tu mesa, sin intermediarios.</p>
+        <p>Trabajamos con genética seleccionada <strong>Landrace × Yorkshire</strong>, reconocida por su excelente rendimiento, textura y sabor. Cada animal es criado con alimentación natural y cuidado responsable.</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">🌿</div>
+            <div>
+              <div class="feature-title">Alimentación Natural</div>
+              <div class="feature-desc">Sin hormonas artificiales. Dieta balanceada y controlada desde el nacimiento.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🧬</div>
+            <div>
+              <div class="feature-title">Genética Seleccionada</div>
+              <div class="feature-desc">Cruce Landrace × Yorkshire. Mejor textura, sabor y rendimiento en canal.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🤝</div>
+            <div>
+              <div class="feature-title">Venta Directa</div>
+              <div class="feature-desc">Eliminamos intermediarios para darte el precio justo y la frescura garantizada.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUTS -->
 <section id="cortes" class="section cuts-bg">
   <div class="wrap">
     <div class="section-head reveal">
@@ -594,7 +678,6 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
             </div>
             <button class="btn-wa" onclick="addToCart()" style="margin-bottom:10px">➕ Agregar al pedido</button>
           </div>
-          <!-- CART -->
           <div id="cart-area" style="display:none">
             <div class="cart-area">
               <div class="cart-title">🛒 Mi pedido</div>
@@ -619,8 +702,8 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   </div>
 </section>
 
-<!-- ══════════════════ TRUST ══════════════════ -->
-<section class="section" style="background:var(--white)">
+<!-- TRUST -->
+<section class="section" style="background:var(--beige)">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="tag">💯 Por qué elegirnos</div>
@@ -629,14 +712,14 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
     <div class="trust-grid">
       <div class="trust-card reveal"><div class="trust-icon">🌿</div><div class="trust-title">Alimentación natural</div><p class="trust-desc">Sin hormonas artificiales. Dieta balanceada y controlada desde el nacimiento hasta la entrega.</p></div>
       <div class="trust-card reveal" style="transition-delay:.07s"><div class="trust-icon">🧬</div><div class="trust-title">Genética seleccionada</div><p class="trust-desc">Cruce Landrace × Yorkshire. Mejor textura, sabor y rendimiento en cada animal.</p></div>
-      <div class="trust-card reveal" style="transition-delay:.14s"><div class="trust-icon">🔒</div><div class="trust-title">Entrega segura</div><p class="trust-desc">Las entregas se coordinan para proteger al cliente y al productor. Ubicación del criadero solo por WhatsApp privado.</p></div>
+      <div class="trust-card reveal" style="transition-delay:.14s"><div class="trust-icon">🔒</div><div class="trust-title">Entrega segura</div><p class="trust-desc">Coordinamos cada entrega para proteger al cliente y al productor. Dirección solo por WhatsApp.</p></div>
       <div class="trust-card reveal" style="transition-delay:.21s"><div class="trust-icon">🤝</div><div class="trust-title">Atención personalizada</div><p class="trust-desc">Coordinamos cada pedido directamente contigo. Respondemos en minutos por WhatsApp.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════ DELIVERY ══════════════════ -->
-<section id="entrega" class="section" style="background:var(--beige)">
+<!-- DELIVERY -->
+<section id="entrega" class="section" style="background:var(--white)">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="tag">🚚 Entrega y Pagos</div>
@@ -651,7 +734,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
           <div class="zone-row"><div><div class="zone-name">Cumbayá · Tumbaco</div><div class="zone-eta">25–40 min estimado</div></div><div class="zone-badge">Coordinado</div></div>
           <div class="zone-row"><div><div class="zone-name">Sangolquí · Los Chillos</div><div class="zone-eta">20–35 min estimado</div></div><div class="zone-badge">Coordinado</div></div>
           <div class="zone-row"><div><div class="zone-name">Retiro en criadero</div><div class="zone-eta">Coordinar con anticipación</div></div><div class="zone-badge free">Sin costo</div></div>
-          <div class="safe-note">🔒 Las entregas se coordinan de forma segura para proteger al cliente y al productor. La dirección exacta del criadero se comparte únicamente por WhatsApp al confirmar el pedido.</div>
+          <div class="safe-note">🔒 La dirección exacta del criadero se comparte únicamente por WhatsApp al confirmar el pedido.</div>
         </div>
         <div class="pay-sec" style="margin-top:20px">
           <div class="pay-title">💳 Métodos de pago</div>
@@ -661,17 +744,17 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
         </div>
       </div>
       <div class="info-list">
-        <div class="info-row"><div class="info-ic">📅</div><div><div class="info-title">Disponibilidad según ciclos de crianza</div><div class="info-body">Disponibilidad sujeta a ciclos de crianza y faena. Reserva anticipada recomendada. No siempre hay stock inmediato.</div></div></div>
-        <div class="info-row"><div class="info-ic">🤝</div><div><div class="info-title">Confirmación directa por WhatsApp</div><div class="info-body">Todo pedido se confirma personalmente. Coordinamos peso exacto, hora y punto de entrega contigo.</div></div></div>
-        <div class="info-row"><div class="info-ic">⚖️</div><div><div class="info-title">Precio final al pesar el animal</div><div class="info-body">El estimado es referencial. El cobro exacto se define al momento de pesar. ±10% de variación es normal en ganado vivo.</div></div></div>
-        <div class="info-row"><div class="info-ic">📋</div><div><div class="info-title">Reservas y preventa disponible</div><div class="info-body">Puedes reservar con anticipación. Confirmamos disponibilidad según el ciclo de producción del criadero.</div></div></div>
+        <div class="info-row"><div class="info-ic">📅</div><div><div class="info-title">Disponibilidad según ciclos de crianza</div><div class="info-body">Reserva anticipada recomendada. No siempre hay stock inmediato.</div></div></div>
+        <div class="info-row"><div class="info-ic">🤝</div><div><div class="info-title">Confirmación directa por WhatsApp</div><div class="info-body">Todo pedido se confirma personalmente. Coordinamos peso, hora y punto de entrega.</div></div></div>
+        <div class="info-row"><div class="info-ic">⚖️</div><div><div class="info-title">Precio final al pesar el animal</div><div class="info-body">El estimado es referencial. El cobro exacto se define al pesar. ±10% de variación es normal.</div></div></div>
+        <div class="info-row"><div class="info-ic">📋</div><div><div class="info-title">Reservas y preventa disponible</div><div class="info-body">Puedes reservar con anticipación según el ciclo de producción del criadero.</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════ CONTACT ══════════════════ -->
-<section id="contacto" class="section" style="background:var(--white)">
+<!-- CONTACT -->
+<section id="contacto" class="section" style="background:var(--beige)">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="tag">📞 Contáctanos</div>
@@ -681,11 +764,11 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
     <div class="ct-grid reveal">
       <div class="ct-card">
         <h3>Información de contacto</h3>
-        <div class="ct-method"><div class="ct-icon">📱</div><div><div class="ct-lbl">WhatsApp principal</div><div class="ct-val">+593 9XX XXX XXXX</div></div></div>
+        <div class="ct-method"><div class="ct-icon">📱</div><div><div class="ct-lbl">WhatsApp principal</div><div class="ct-val">+593 980 108 244</div></div></div>
         <div class="ct-method"><div class="ct-icon">📘</div><div><div class="ct-lbl">Facebook</div><div class="ct-val">@PuroChanchoFamiliar</div></div></div>
         <div class="ct-method"><div class="ct-icon">📸</div><div><div class="ct-lbl">Instagram</div><div class="ct-val">@PuroChanchoFamiliar</div></div></div>
         <div class="ct-method"><div class="ct-icon">🕐</div><div><div class="ct-lbl">Horario de atención</div><div class="ct-val">Lun–Sáb · 7:00 AM – 6:00 PM</div></div></div>
-        <a href="https://wa.me/593900000000?text=Hola!+Me+interesa+hacer+un+pedido" target="_blank" class="btn-wa-big">💬 Escribir por WhatsApp ahora</a>
+        <a href="https://wa.me/593980108244?text=Hola!+Me+interesa+hacer+un+pedido" target="_blank" class="btn-wa-big">💬 Escribir por WhatsApp ahora</a>
       </div>
       <div class="ct-card">
         <h3>Escríbenos directamente</h3>
@@ -709,7 +792,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   </div>
 </section>
 
-<!-- ══════════════════ FOOTER ══════════════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="ft-inner">
     <div class="ft-top">
@@ -725,11 +808,11 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
       <div class="ft-col"><h4>Información</h4><ul>
         <li><a href="#entrega">Zonas de entrega</a></li>
         <li><a href="#entrega">Métodos de pago</a></li>
-        <li><a href="#contacto">Por qué elegirnos</a></li>
+        <li><a href="#nosotros">Quiénes somos</a></li>
       </ul></div>
       <div class="ft-col"><h4>Contacto</h4><ul>
         <li><a href="#contacto">WhatsApp</a></li>
-        <li><a href="https://wa.me/593900000000">Cotizar ahora</a></li>
+        <li><a href="https://wa.me/593980108244">Cotizar ahora</a></li>
       </ul></div>
     </div>
     <div class="ft-bot">
@@ -739,11 +822,10 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   </div>
 </footer>
 
-<!-- ══════════════════ WA FLOAT + TOAST ══════════════════ -->
-<a href="https://wa.me/593900000000?text=Hola!" target="_blank" class="wa-float">💬</a>
+<a href="https://wa.me/593980108244?text=Hola!" target="_blank" class="wa-float">💬</a>
 <div id="toast"></div>
 
-<!-- ══════════════════ MODAL LECHON ══════════════════ -->
+<!-- MODAL LECHON -->
 <div class="modal-ov" id="lechon-modal">
   <div class="modal-box" onclick="event.stopPropagation()">
     <h3>🐷 Confirmar reserva</h3>
@@ -756,7 +838,6 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
       <div class="val" id="modal-total">$70 – $110</div>
       <div class="note">*Precio final confirmado al momento de entrega</div>
     </div>
-    <p style="font-size:.72rem;color:var(--text3);margin-bottom:16px;line-height:1.6">⚠️ Precio varía según edad, genética y disponibilidad.</p>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
       <button class="btn-confirm" onclick="sendWALechon()">💬 Reservar por WhatsApp</button>
@@ -764,14 +845,13 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   </div>
 </div>
 
-<!-- ══════════════════ ADMIN PANEL ══════════════════ -->
+<!-- ADMIN PANEL -->
 <div id="admin-ov">
   <div class="admin-panel" onclick="event.stopPropagation()">
     <div class="admin-hdr">
       <h2>⚙️ Panel Administrador</h2>
       <button class="admin-close" onclick="closeAdmin()">✕</button>
     </div>
-    <!-- LOGIN -->
     <div id="admin-login-screen" class="admin-body">
       <div class="admin-login">
         <h3>Acceso restringido</h3>
@@ -781,7 +861,6 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
         <button class="btn btn-primary" onclick="checkPwd()" style="width:100%;justify-content:center;padding:13px">Ingresar</button>
       </div>
     </div>
-    <!-- CONTENT -->
     <div id="admin-content" style="display:none;flex-direction:column;height:100%;overflow:hidden">
       <div class="admin-tabs">
         <button class="admin-tab active" onclick="showTab('products',this)">🐷 Productos</button>
@@ -789,16 +868,14 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
         <button class="admin-tab" onclick="showTab('clients',this)">👤 Clientes</button>
         <button class="admin-tab" onclick="showTab('inventory',this)">📦 Inventario</button>
       </div>
-      <!-- TAB PRODUCTS -->
       <div class="admin-body" id="tab-products">
         <div class="admin-sec-title">🐷 Gestión de Productos</div>
         <div class="admin-prod-grid">
           <div class="admin-card">
             <h4>🐷 Lechones Tiernos</h4>
-            <div class="admin-field"><label>Tipo de venta</label><select class="aselect" disabled><option>Por UNIDAD (fijo)</option></select></div>
             <div class="grid2">
-              <div class="admin-field"><label>Precio mín ($)</label><input class="form-input" type="number" id="adm-lp-min" value="70" min="0"></div>
-              <div class="admin-field"><label>Precio máx ($)</label><input class="form-input" type="number" id="adm-lp-max" value="110" min="0"></div>
+              <div class="admin-field"><label>Precio mín ($)</label><input class="form-input" type="number" id="adm-lp-min" value="70"></div>
+              <div class="admin-field"><label>Precio máx ($)</label><input class="form-input" type="number" id="adm-lp-max" value="110"></div>
             </div>
             <div class="admin-field"><label>Genética</label><input class="form-input" type="text" id="adm-lechon-genetics" value="Landrace × Yorkshire"></div>
             <div class="admin-field"><label>Disponibilidad</label>
@@ -811,7 +888,6 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
           </div>
           <div class="admin-card">
             <h4>🐗 Cerdo Adulto en Pie</h4>
-            <div class="admin-field"><label>Tipo de venta</label><select class="aselect" disabled><option>Por LIBRA (fijo)</option></select></div>
             <div class="grid2">
               <div class="admin-field"><label>Precio mín ($/lb)</label><input class="form-input" type="number" step="0.01" id="adm-pp-min" value="0.95"></div>
               <div class="admin-field"><label>Precio máx ($/lb)</label><input class="form-input" type="number" step="0.01" id="adm-pp-max" value="1.20"></div>
@@ -826,7 +902,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
             </div>
           </div>
           <div class="admin-card" style="grid-column:span 2">
-            <h4>🔪 Cortes — Precios por libra (mín / máx)</h4>
+            <h4>🔪 Cortes — Precios por libra</h4>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
               <div class="admin-field"><label>Pierna</label><div class="grid2"><input class="form-input" id="c-pierna-min" type="number" step="0.01" value="2.60"><input class="form-input" id="c-pierna-max" type="number" step="0.01" value="2.90"></div></div>
               <div class="admin-field"><label>Lomo</label><div class="grid2"><input class="form-input" id="c-lomo-min" type="number" step="0.01" value="3.20"><input class="form-input" id="c-lomo-max" type="number" step="0.01" value="3.80"></div></div>
@@ -837,9 +913,8 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
             </div>
           </div>
         </div>
-        <div class="save-bar"><p>Los cambios se guardan en el servidor y persisten tras reiniciar.</p><button class="btn-save" onclick="saveProducts()">💾 Guardar cambios</button></div>
+        <div class="save-bar"><p>Los cambios se guardan en el servidor.</p><button class="btn-save" onclick="saveProducts()">💾 Guardar cambios</button></div>
       </div>
-      <!-- TAB STATS -->
       <div class="admin-body" id="tab-stats" style="display:none">
         <div class="admin-sec-title">📊 Estadísticas del Negocio</div>
         <div class="stats-grid">
@@ -867,11 +942,9 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
         </div>
         <div class="export-row">
           <button class="btn-export" onclick="exportCSV()">📄 Exportar CSV</button>
-          <button class="btn-export" onclick="exportReport()">📊 Reporte mensual</button>
           <button class="btn-export" onclick="window.print()">🖨️ Imprimir</button>
         </div>
       </div>
-      <!-- TAB CLIENTS -->
       <div class="admin-body" id="tab-clients" style="display:none">
         <div class="admin-sec-title">👤 Registro de Clientes</div>
         <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
@@ -881,11 +954,10 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
         <div style="overflow-x:auto">
           <table class="ctable">
             <thead><tr><th>#</th><th>Nombre</th><th>Teléfono</th><th>Sector</th><th>Producto</th><th>Fecha</th></tr></thead>
-            <tbody id="clients-tbody"><tr><td colspan="6" style="text-align:center;color:var(--text3);padding:20px">Cargando clientes del servidor...</td></tr></tbody>
+            <tbody id="clients-tbody"><tr><td colspan="6" style="text-align:center;color:var(--text3);padding:20px">Cargando clientes...</td></tr></tbody>
           </table>
         </div>
       </div>
-      <!-- TAB INVENTORY -->
       <div class="admin-body" id="tab-inventory" style="display:none">
         <div class="admin-sec-title">📦 Control de Inventario</div>
         <div class="inv-grid">
@@ -907,7 +979,6 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
               <select class="aselect"><option>✅ Disponible</option><option>🟠 Stock limitado</option><option>⏳ Próxima faena</option></select>
             </div>
             <div class="admin-field"><label>Próxima faena</label><input class="form-input" type="date"></div>
-            <div class="admin-field"><label>Nota para clientes</label><input class="form-input" type="text" placeholder="ej: Faena jueves"></div>
           </div>
         </div>
         <div class="save-bar"><p>Actualiza el inventario para reflejar disponibilidad real.</p><button class="btn-save" onclick="saveInventory()">💾 Actualizar inventario</button></div>
@@ -916,29 +987,20 @@ footer{background:var(--black);color:rgba(255,255,255,.5);padding:52px 24px 26px
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-   JAVASCRIPT — Lógica + Integración con Flask
-═══════════════════════════════════════════════════════════ -->
 <script>
-/* ── VARIABLES GLOBALES ─────────────────────────────────────── */
-const WA = "593900000000";
+const WA = "593980108244";
 const ADMIN_PWD = "chancho2025";
-
 let PRICES = { lMin:70, lMax:110, pMin:0.95, pMax:1.20 };
-
 let CUTS = [
-  {id:"pierna",   name:"Pierna / Pernil", min:2.60, max:2.90, desc:"Favorito para hornado ecuatoriano"},
-  {id:"lomo",     name:"Lomo",            min:3.20, max:3.80, desc:"El corte más tierno · plancha u horno"},
-  {id:"costilla", name:"Costillas",       min:2.80, max:3.40, desc:"Parrilla · horno · en salsa"},
-  {id:"panceta",  name:"Panceta",         min:2.20, max:2.80, desc:"Fritada · tocino · chicharrón"},
-  {id:"paleta",   name:"Paleta",          min:2.30, max:2.70, desc:"Estofados y seco de chancho"},
-  {id:"cabeza",   name:"Cabeza",          min:1.50, max:2.00, desc:"Caldos y chicharrón de cabeza"},
+  {id:"pierna",   name:"Pierna / Pernil", min:2.60, max:2.90, desc:"Favorito para hornado ecuatoriano", img:"corte-pierna.jpg"},
+  {id:"lomo",     name:"Lomo",            min:3.20, max:3.80, desc:"El corte más tierno · plancha u horno", img:"corte-lomo.jpg"},
+  {id:"costilla", name:"Costillas",       min:2.80, max:3.40, desc:"Parrilla · horno · en salsa", img:"corte-costillas.jpg"},
+  {id:"panceta",  name:"Panceta",         min:2.20, max:2.80, desc:"Fritada · tocino · chicharrón", img:"corte-panceta.jpg"},
+  {id:"paleta",   name:"Paleta",          min:2.30, max:2.70, desc:"Estofados y seco de chancho", img:"corte-paleta.jpg"},
+  {id:"cabeza",   name:"Cabeza",          min:1.50, max:2.00, desc:"Caldos y chicharrón de cabeza", img:"corte-cabeza.jpg"},
 ];
+let activeCut = null, cart = [], qtyLechon = 1, allClients = [];
 
-let activeCut = null, cart = [], qtyLechon = 1;
-let allClients = [];
-
-/* ── CUTS GRID ──────────────────────────────────────────────── */
 function buildCutsGrid() {
   const cg = document.getElementById("cuts-grid");
   cg.innerHTML = "";
@@ -946,17 +1008,20 @@ function buildCutsGrid() {
     const el = document.createElement("div");
     el.className = "cut-card";
     el.id = "cut-" + c.id;
-    el.innerHTML = `<div class="cut-chk">✓</div>
-      <div class="cut-name">${c.name}</div>
-      <div class="cut-price">$${c.min.toFixed(2)} – $${c.max.toFixed(2)}/lb</div>
-      <div class="cut-desc">${c.desc}</div>`;
+    el.innerHTML = `
+      <div class="cut-chk">✓</div>
+      <div class="cut-img"><img src="/static/images/${c.img}" alt="${c.name}" loading="lazy"></div>
+      <div class="cut-body">
+        <div class="cut-name">${c.name}</div>
+        <div class="cut-price">$${c.min.toFixed(2)}–$${c.max.toFixed(2)}/lb</div>
+        <div class="cut-desc">${c.desc}</div>
+      </div>`;
     el.onclick = () => selectCut(c);
     cg.appendChild(el);
   });
 }
 buildCutsGrid();
 
-/* ── CUT SELECTION ──────────────────────────────────────────── */
 function selectCut(c) {
   activeCut = c;
   document.querySelectorAll(".cut-card").forEach(e => e.classList.remove("active"));
@@ -974,399 +1039,283 @@ function updateCutCalc() {
   const w = parseInt(document.getElementById("cut-slider").value);
   document.getElementById("cut-w-val").textContent = w + " lb";
   document.getElementById("cut-w-lbl").textContent = w + " lb";
-  document.getElementById("cut-est").textContent = "$" + (w * activeCut.min).toFixed(2) + " – $" + (w * activeCut.max).toFixed(2);
-  const pct = ((w - 5) / (50 - 5)) * 100;
-  document.getElementById("cut-slider").style.background =
-    `linear-gradient(to right,var(--red) 0%,var(--red) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
+  document.getElementById("cut-est").textContent = "$" + (w*activeCut.min).toFixed(2) + " – $" + (w*activeCut.max).toFixed(2);
+  const pct = ((w-5)/(50-5))*100;
+  document.getElementById("cut-slider").style.background = `linear-gradient(to right,var(--red) 0%,var(--red) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
 }
 
-/* ── CART ───────────────────────────────────────────────────── */
 function addToCart() {
   if (!activeCut) return;
   const w = parseInt(document.getElementById("cut-slider").value);
-  cart.push({ name: activeCut.name, weight: w, min: activeCut.min, max: activeCut.max, tMin: w * activeCut.min, tMax: w * activeCut.max });
+  cart.push({name:activeCut.name, weight:w, min:activeCut.min, max:activeCut.max, tMin:w*activeCut.min, tMax:w*activeCut.max});
   renderCart();
   showToast("✅ " + activeCut.name + " agregado al pedido");
 }
 
 function renderCart() {
-  if (!cart.length) { document.getElementById("cart-area").style.display = "none"; return; }
-  document.getElementById("cart-area").style.display = "block";
-  const tMin = cart.reduce((s, i) => s + i.tMin, 0);
-  const tMax = cart.reduce((s, i) => s + i.tMax, 0);
-  document.getElementById("cart-rows").innerHTML = cart.map((it, i) => `
+  if (!cart.length) { document.getElementById("cart-area").style.display="none"; return; }
+  document.getElementById("cart-area").style.display="block";
+  const tMin = cart.reduce((s,i)=>s+i.tMin,0);
+  const tMax = cart.reduce((s,i)=>s+i.tMax,0);
+  document.getElementById("cart-rows").innerHTML = cart.map((it,i)=>`
     <div class="cart-row">
       <span class="cart-row-name">${it.name}</span>
       <span class="cart-row-detail">${it.weight}lb</span>
       <span class="cart-row-price">$${it.tMin.toFixed(2)}–$${it.tMax.toFixed(2)}</span>
       <span class="cart-row-del" onclick="rmCart(${i})">✕</span>
     </div>`).join("");
-  document.getElementById("cart-total").textContent = "$" + tMin.toFixed(2) + " – $" + tMax.toFixed(2);
+  document.getElementById("cart-total").textContent = "$"+tMin.toFixed(2)+" – $"+tMax.toFixed(2);
 }
 
-window.rmCart = i => { cart.splice(i, 1); renderCart(); };
+window.rmCart = i => { cart.splice(i,1); renderCart(); };
+function clearCart() { cart=[]; document.getElementById("cart-area").style.display="none"; showToast("🗑️ Pedido limpiado"); }
 
-function clearCart() {
-  cart = [];
-  document.getElementById("cart-area").style.display = "none";
-  showToast("🗑️ Pedido limpiado");
-}
-
-/* ── LECHONES ───────────────────────────────────────────────── */
 function changeQty(d) {
-  qtyLechon = Math.max(1, qtyLechon + d);
+  qtyLechon = Math.max(1, qtyLechon+d);
   document.getElementById("qty-lechon").textContent = qtyLechon;
-  document.getElementById("est-lechon").textContent = "$" + (PRICES.lMin * qtyLechon) + " – $" + (PRICES.lMax * qtyLechon);
+  document.getElementById("est-lechon").textContent = "$"+(PRICES.lMin*qtyLechon)+" – $"+(PRICES.lMax*qtyLechon);
 }
 
 function openLechonModal() {
-  document.getElementById("modal-qty").textContent = qtyLechon + (qtyLechon === 1 ? " lechón" : " lechones");
-  document.getElementById("modal-total").textContent = "$" + (PRICES.lMin * qtyLechon) + " – $" + (PRICES.lMax * qtyLechon);
+  document.getElementById("modal-qty").textContent = qtyLechon+(qtyLechon===1?" lechón":" lechones");
+  document.getElementById("modal-total").textContent = "$"+(PRICES.lMin*qtyLechon)+" – $"+(PRICES.lMax*qtyLechon);
   document.getElementById("lechon-modal").classList.add("open");
 }
+function closeModal() { document.getElementById("lechon-modal").classList.remove("open"); }
+document.getElementById("lechon-modal").addEventListener("click", function(e){ if(e.target===this)closeModal(); });
 
-function closeModal() {
-  document.getElementById("lechon-modal").classList.remove("open");
-}
-
-document.getElementById("lechon-modal").addEventListener("click", function(e) {
-  if (e.target === this) closeModal();
-});
-
-/* ── CERDO EN PIE ───────────────────────────────────────────── */
 function calcPie() {
   const w = parseInt(document.getElementById("sl-pie").value);
-  document.getElementById("pie-w-val").textContent = w + " lb";
-  document.getElementById("pie-est-lbl").textContent = "Estimado para " + w + " lb";
-  document.getElementById("est-pie").textContent = "$" + (w * PRICES.pMin).toFixed(0) + " – $" + (w * PRICES.pMax).toFixed(0);
-  const pct = ((w - 180) / (260 - 180)) * 100;
-  document.getElementById("sl-pie").style.background =
-    `linear-gradient(to right,var(--red) 0%,var(--red) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
+  document.getElementById("pie-w-val").textContent = w+" lb";
+  document.getElementById("pie-est-lbl").textContent = "Estimado para "+w+" lb";
+  document.getElementById("est-pie").textContent = "$"+(w*PRICES.pMin).toFixed(0)+" – $"+(w*PRICES.pMax).toFixed(0);
+  const pct = ((w-180)/(260-180))*100;
+  document.getElementById("sl-pie").style.background = `linear-gradient(to right,var(--red) 0%,var(--red) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
 }
 calcPie();
 
-/* ── NAV ────────────────────────────────────────────────────── */
-function toggleNav() {
-  document.getElementById("nav-links").classList.toggle("open");
-}
-window.addEventListener("scroll", () => {
-  document.getElementById("nav").classList.toggle("scrolled", window.scrollY > 20);
-});
+function toggleNav() { document.getElementById("nav-links").classList.toggle("open"); }
+window.addEventListener("scroll", ()=>{ document.getElementById("nav").classList.toggle("scrolled", window.scrollY>20); });
 
-/* ── TOAST ──────────────────────────────────────────────────── */
 function showToast(msg) {
   const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 3200);
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 3200);
 }
 
-/* ── REVEAL SCROLL ──────────────────────────────────────────── */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-}, { threshold: 0.1 });
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
+},{threshold:0.1});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* ── ADMIN ──────────────────────────────────────────────────── */
 function openAdmin() {
   document.getElementById("admin-ov").classList.add("open");
-  document.getElementById("admin-login-screen").style.display = "block";
-  document.getElementById("admin-content").style.display = "none";
-  document.getElementById("admin-err").style.display = "none";
-  document.getElementById("admin-pwd").value = "";
+  document.getElementById("admin-login-screen").style.display="block";
+  document.getElementById("admin-content").style.display="none";
+  document.getElementById("admin-err").style.display="none";
+  document.getElementById("admin-pwd").value="";
   buildBarChart();
 }
-
-function closeAdmin() {
-  document.getElementById("admin-ov").classList.remove("open");
-}
-
-document.getElementById("admin-ov").addEventListener("click", function(e) {
-  if (e.target === this) closeAdmin();
-});
+function closeAdmin() { document.getElementById("admin-ov").classList.remove("open"); }
+document.getElementById("admin-ov").addEventListener("click", function(e){ if(e.target===this)closeAdmin(); });
 
 function checkPwd() {
-  if (document.getElementById("admin-pwd").value === ADMIN_PWD) {
-    document.getElementById("admin-login-screen").style.display = "none";
-    document.getElementById("admin-content").style.display = "flex";
+  if(document.getElementById("admin-pwd").value===ADMIN_PWD){
+    document.getElementById("admin-login-screen").style.display="none";
+    document.getElementById("admin-content").style.display="flex";
   } else {
-    document.getElementById("admin-err").style.display = "block";
+    document.getElementById("admin-err").style.display="block";
   }
 }
 
-function showTab(name, btn) {
-  document.querySelectorAll("[id^='tab-']").forEach(t => t.style.display = "none");
-  document.querySelectorAll(".admin-tab").forEach(t => t.classList.remove("active"));
-  document.getElementById("tab-" + name).style.display = "block";
+function showTab(name,btn) {
+  document.querySelectorAll("[id^='tab-']").forEach(t=>t.style.display="none");
+  document.querySelectorAll(".admin-tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("tab-"+name).style.display="block";
   btn.classList.add("active");
-  if (name === "stats") buildBarChart();
-  if (name === "clients") cargarClientesAdmin();
+  if(name==="stats") buildBarChart();
+  if(name==="clients") cargarClientesAdmin();
 }
 
-/* ── ADMIN: GUARDAR PRODUCTOS ───────────────────────────────── */
 function saveProducts() {
-  // Actualizar PRICES localmente
-  PRICES.lMin = parseFloat(document.getElementById("adm-lp-min").value) || 70;
-  PRICES.lMax = parseFloat(document.getElementById("adm-lp-max").value) || 110;
-  PRICES.pMin = parseFloat(document.getElementById("adm-pp-min").value) || 0.95;
-  PRICES.pMax = parseFloat(document.getElementById("adm-pp-max").value) || 1.20;
-
-  // Actualizar UI de precios
-  document.getElementById("lp-min").textContent = PRICES.lMin;
-  document.getElementById("lp-max").textContent = PRICES.lMax;
-  document.getElementById("pp-min").textContent = PRICES.pMin;
-  document.getElementById("pp-max").textContent = PRICES.pMax;
-
-  // Actualizar genética
-  document.getElementById("lechon-genetics").textContent = document.getElementById("adm-lechon-genetics").value;
-  document.getElementById("pie-genetics").textContent    = document.getElementById("adm-pie-genetics").value;
-
-  // Actualizar disponibilidad
-  setAvailTag("lechon-avail-tag","lechon-avail-txt", document.getElementById("adm-lechon-avail").value);
-  setAvailTag("pie-avail-tag","pie-avail-txt", document.getElementById("adm-pie-avail").value);
-
-  // Actualizar cortes
-  const campos = ["pierna","lomo","costilla","panceta","paleta","cabeza"];
-  campos.forEach((c, i) => {
-    CUTS[i].min = parseFloat(document.getElementById("c-" + c + "-min").value) || CUTS[i].min;
-    CUTS[i].max = parseFloat(document.getElementById("c-" + c + "-max").value) || CUTS[i].max;
+  PRICES.lMin=parseFloat(document.getElementById("adm-lp-min").value)||70;
+  PRICES.lMax=parseFloat(document.getElementById("adm-lp-max").value)||110;
+  PRICES.pMin=parseFloat(document.getElementById("adm-pp-min").value)||0.95;
+  PRICES.pMax=parseFloat(document.getElementById("adm-pp-max").value)||1.20;
+  document.getElementById("lp-min").textContent=PRICES.lMin;
+  document.getElementById("lp-max").textContent=PRICES.lMax;
+  document.getElementById("pp-min").textContent=PRICES.pMin;
+  document.getElementById("pp-max").textContent=PRICES.pMax;
+  document.getElementById("lechon-genetics").textContent=document.getElementById("adm-lechon-genetics").value;
+  document.getElementById("pie-genetics").textContent=document.getElementById("adm-pie-genetics").value;
+  setAvailTag("lechon-avail-tag","lechon-avail-txt",document.getElementById("adm-lechon-avail").value);
+  setAvailTag("pie-avail-tag","pie-avail-txt",document.getElementById("adm-pie-avail").value);
+  const campos=["pierna","lomo","costilla","panceta","paleta","cabeza"];
+  campos.forEach((c,i)=>{
+    CUTS[i].min=parseFloat(document.getElementById("c-"+c+"-min").value)||CUTS[i].min;
+    CUTS[i].max=parseFloat(document.getElementById("c-"+c+"-max").value)||CUTS[i].max;
   });
   buildCutsGrid();
-  if (activeCut) {
-    const updated = CUTS.find(c => c.id === activeCut.id);
-    if (updated) selectCut(updated);
-  }
+  if(activeCut){const updated=CUTS.find(c=>c.id===activeCut.id);if(updated)selectCut(updated);}
   calcPie();
-
-  // Guardar en servidor Flask
   guardarPreciosServidor();
 }
 
-function setAvailTag(tagId, txtId, val) {
-  const tag = document.getElementById(tagId);
-  const txt = document.getElementById(txtId);
-  tag.className = "avail-tag";
-  const dot = tag.querySelector("div");
-  if (val === "av") {
-    tag.classList.add("av"); txt.textContent = "Disponible";
-    dot.className = "dot-g";
-  } else if (val === "rs") {
-    tag.classList.add("rs"); txt.textContent = "Reservado";
-    dot.className = "dot-o";
-  } else {
-    tag.classList.add("sn"); txt.textContent = "Próximamente";
-    dot.className = "dot-gr";
-  }
+function setAvailTag(tagId,txtId,val) {
+  const tag=document.getElementById(tagId);
+  const txt=document.getElementById(txtId);
+  tag.className="avail-tag";
+  const dot=tag.querySelector("div");
+  if(val==="av"){tag.classList.add("av");txt.textContent="Disponible";dot.className="dot-g";}
+  else if(val==="rs"){tag.classList.add("rs");txt.textContent="Reservado";dot.className="dot-o";}
+  else{tag.classList.add("sn");txt.textContent="Próximamente";dot.className="dot-gr";}
 }
 
-function saveInventory() { showToast("✅ Inventario actualizado"); }
+function saveInventory(){showToast("✅ Inventario actualizado");}
 
-/* ── CHART ──────────────────────────────────────────────────── */
-const barData = [
-  {label:"Ene",v:12},{label:"Feb",v:18},{label:"Mar",v:14},
-  {label:"Abr",v:22},{label:"May",v:19},{label:"Jun",v:24}
-];
+const barData=[{label:"Ene",v:12},{label:"Feb",v:18},{label:"Mar",v:14},{label:"Abr",v:22},{label:"May",v:19},{label:"Jun",v:24}];
 function buildBarChart() {
-  const max = Math.max(...barData.map(d => d.v));
-  document.getElementById("bar-chart").innerHTML = barData.map(d => `
+  const max=Math.max(...barData.map(d=>d.v));
+  document.getElementById("bar-chart").innerHTML=barData.map(d=>`
     <div class="bar-col">
       <div class="bar-val">${d.v}</div>
-      <div class="bar-fill" style="height:${(d.v/max)*100}%" title="${d.v} consultas"></div>
+      <div class="bar-fill" style="height:${(d.v/max)*100}%"></div>
       <div class="bar-lbl">${d.label}</div>
     </div>`).join("");
 }
 
-/* ══════════════════════════════════════════════════════════════
-   INTEGRACIÓN CON FLASK
-══════════════════════════════════════════════════════════════ */
-
-/* ── Cargar precios desde el servidor al iniciar ────────────── */
 async function cargarPrecios() {
   try {
-    const res  = await fetch('/api/precios');
-    if (!res.ok) return;
-    const data = await res.json();
-
-    PRICES.lMin = data.lechon.min;
-    PRICES.lMax = data.lechon.max;
-    PRICES.pMin = data.pie.min;
-    PRICES.pMax = data.pie.max;
-
-    document.getElementById("lp-min").textContent = data.lechon.min;
-    document.getElementById("lp-max").textContent = data.lechon.max;
-    document.getElementById("pp-min").textContent = data.pie.min;
-    document.getElementById("pp-max").textContent = data.pie.max;
-
-    // Actualizar inputs del admin
-    document.getElementById("adm-lp-min").value = data.lechon.min;
-    document.getElementById("adm-lp-max").value = data.lechon.max;
-    document.getElementById("adm-pp-min").value = data.pie.min;
-    document.getElementById("adm-pp-max").value = data.pie.max;
-
-    const mapa = { pierna:0, lomo:1, costilla:2, panceta:3, paleta:4, cabeza:5 };
-    if (data.cortes) {
-      for (const [nombre, idx] of Object.entries(mapa)) {
-        if (data.cortes[nombre]) {
-          CUTS[idx].min = data.cortes[nombre].min;
-          CUTS[idx].max = data.cortes[nombre].max;
-          document.getElementById("c-" + nombre + "-min").value = data.cortes[nombre].min;
-          document.getElementById("c-" + nombre + "-max").value = data.cortes[nombre].max;
+    const res=await fetch('/api/precios');
+    if(!res.ok)return;
+    const data=await res.json();
+    PRICES.lMin=data.lechon.min; PRICES.lMax=data.lechon.max;
+    PRICES.pMin=data.pie.min; PRICES.pMax=data.pie.max;
+    document.getElementById("lp-min").textContent=data.lechon.min;
+    document.getElementById("lp-max").textContent=data.lechon.max;
+    document.getElementById("pp-min").textContent=data.pie.min;
+    document.getElementById("pp-max").textContent=data.pie.max;
+    document.getElementById("adm-lp-min").value=data.lechon.min;
+    document.getElementById("adm-lp-max").value=data.lechon.max;
+    document.getElementById("adm-pp-min").value=data.pie.min;
+    document.getElementById("adm-pp-max").value=data.pie.max;
+    if(data.cortes){
+      const mapa={pierna:0,lomo:1,costilla:2,panceta:3,paleta:4,cabeza:5};
+      for(const[nombre,idx]of Object.entries(mapa)){
+        if(data.cortes[nombre]){
+          CUTS[idx].min=data.cortes[nombre].min;
+          CUTS[idx].max=data.cortes[nombre].max;
+          document.getElementById("c-"+nombre+"-min").value=data.cortes[nombre].min;
+          document.getElementById("c-"+nombre+"-max").value=data.cortes[nombre].max;
         }
       }
     }
-    buildCutsGrid();
-    calcPie();
-    changeQty(0);
-  } catch (e) {
-    console.log("Usando precios por defecto");
-  }
+    buildCutsGrid(); calcPie(); changeQty(0);
+  } catch(e){console.log("Precios por defecto");}
 }
 
-/* ── Guardar precios en el servidor ─────────────────────────── */
 async function guardarPreciosServidor() {
   try {
-    const precios = {
-      lechon: { min: PRICES.lMin, max: PRICES.lMax },
-      pie:    { min: PRICES.pMin, max: PRICES.pMax },
-      cortes: {
-        pierna:   { min: parseFloat(document.getElementById("c-pierna-min").value),   max: parseFloat(document.getElementById("c-pierna-max").value) },
-        lomo:     { min: parseFloat(document.getElementById("c-lomo-min").value),     max: parseFloat(document.getElementById("c-lomo-max").value) },
-        costilla: { min: parseFloat(document.getElementById("c-costilla-min").value), max: parseFloat(document.getElementById("c-costilla-max").value) },
-        panceta:  { min: parseFloat(document.getElementById("c-panceta-min").value),  max: parseFloat(document.getElementById("c-panceta-max").value) },
-        paleta:   { min: parseFloat(document.getElementById("c-paleta-min").value),   max: parseFloat(document.getElementById("c-paleta-max").value) },
-        cabeza:   { min: parseFloat(document.getElementById("c-cabeza-min").value),   max: parseFloat(document.getElementById("c-cabeza-max").value) }
+    const precios={
+      lechon:{min:PRICES.lMin,max:PRICES.lMax},
+      pie:{min:PRICES.pMin,max:PRICES.pMax},
+      cortes:{
+        pierna:{min:parseFloat(document.getElementById("c-pierna-min").value),max:parseFloat(document.getElementById("c-pierna-max").value)},
+        lomo:{min:parseFloat(document.getElementById("c-lomo-min").value),max:parseFloat(document.getElementById("c-lomo-max").value)},
+        costilla:{min:parseFloat(document.getElementById("c-costilla-min").value),max:parseFloat(document.getElementById("c-costilla-max").value)},
+        panceta:{min:parseFloat(document.getElementById("c-panceta-min").value),max:parseFloat(document.getElementById("c-panceta-max").value)},
+        paleta:{min:parseFloat(document.getElementById("c-paleta-min").value),max:parseFloat(document.getElementById("c-paleta-max").value)},
+        cabeza:{min:parseFloat(document.getElementById("c-cabeza-min").value),max:parseFloat(document.getElementById("c-cabeza-max").value)}
       }
     };
-    const res = await fetch('/api/precios', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(precios)
-    });
-    if (res.ok) showToast("✅ Cambios guardados en el servidor");
-  } catch (e) {
-    showToast("⚠️ Sin conexión al servidor");
-  }
+    const res=await fetch('/api/precios',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(precios)});
+    if(res.ok)showToast("✅ Cambios guardados");
+  } catch(e){showToast("⚠️ Sin conexión al servidor");}
 }
 
-/* ── Guardar cliente en el servidor ─────────────────────────── */
-async function guardarCliente(nombre, telefono, sector, producto, nota = '') {
+async function guardarCliente(nombre,telefono,sector,producto,nota='') {
   try {
-    await fetch('/api/cliente', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, telefono, sector, producto, nota })
-    });
-  } catch (e) {
-    console.log("No se pudo guardar cliente");
-  }
+    await fetch('/api/cliente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nombre,telefono,sector,producto,nota})});
+  } catch(e){}
 }
 
-/* ── Cargar clientes en el panel admin ──────────────────────── */
 async function cargarClientesAdmin() {
   try {
-    const res = await fetch('/api/clientes');
-    allClients = await res.json();
-    document.getElementById("stat-consultas").textContent = allClients.length;
+    const res=await fetch('/api/clientes');
+    allClients=await res.json();
+    document.getElementById("stat-consultas").textContent=allClients.length;
     renderClientsTable(allClients);
-  } catch (e) {
-    document.getElementById("clients-tbody").innerHTML =
-      '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:16px">No se pudo conectar al servidor</td></tr>';
+  } catch(e){
+    document.getElementById("clients-tbody").innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:16px">No se pudo conectar al servidor</td></tr>';
   }
 }
 
 function renderClientsTable(data) {
-  if (!data.length) {
-    document.getElementById("clients-tbody").innerHTML =
-      '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:16px">No hay clientes registrados aún</td></tr>';
+  if(!data.length){
+    document.getElementById("clients-tbody").innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:16px">No hay clientes registrados aún</td></tr>';
     return;
   }
-  document.getElementById("clients-tbody").innerHTML = data.map(c => `
-    <tr>
-      <td>${c.id}</td>
-      <td style="font-weight:600">${c.nombre}</td>
-      <td>${c.telefono || '—'}</td>
-      <td>${c.sector || '—'}</td>
-      <td>${c.producto || '—'}</td>
-      <td>${c.fecha || '—'}</td>
-    </tr>`).join("");
+  document.getElementById("clients-tbody").innerHTML=data.map(c=>`
+    <tr><td>${c.id}</td><td style="font-weight:600">${c.nombre}</td><td>${c.telefono||'—'}</td><td>${c.sector||'—'}</td><td>${c.producto||'—'}</td><td>${c.fecha||'—'}</td></tr>`).join("");
 }
 
 function filterClients() {
-  const q = document.getElementById("search-clients").value.toLowerCase();
-  renderClientsTable(allClients.filter(c =>
-    (c.nombre || '').toLowerCase().includes(q) ||
-    (c.sector || '').toLowerCase().includes(q) ||
-    (c.producto || '').toLowerCase().includes(q)
-  ));
+  const q=document.getElementById("search-clients").value.toLowerCase();
+  renderClientsTable(allClients.filter(c=>(c.nombre||'').toLowerCase().includes(q)||(c.sector||'').toLowerCase().includes(q)||(c.producto||'').toLowerCase().includes(q)));
 }
 
-/* ── Exportar CSV ───────────────────────────────────────────── */
 function exportCSV() {
-  if (!allClients.length) { showToast("⚠️ Sin datos para exportar"); return; }
-  const cols = ["id","nombre","telefono","sector","producto","nota","fecha"];
-  const header = cols.join(",");
-  const rows = allClients.map(c => cols.map(k => `"${(c[k]||'').toString().replace(/"/g,'""')}"`).join(","));
-  const csv = [header, ...rows].join("\n");
-  const a = document.createElement("a");
-  a.href = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
-  a.download = "puro_chancho_clientes.csv";
+  if(!allClients.length){showToast("⚠️ Sin datos para exportar");return;}
+  const cols=["id","nombre","telefono","sector","producto","nota","fecha"];
+  const header=cols.join(",");
+  const rows=allClients.map(c=>cols.map(k=>`"${(c[k]||'').toString().replace(/"/g,'""')}"`).join(","));
+  const csv=[header,...rows].join("\n");
+  const a=document.createElement("a");
+  a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);
+  a.download="puro_chancho_clientes.csv";
   a.click();
-  showToast("📄 CSV exportado correctamente");
+  showToast("📄 CSV exportado");
 }
 
-function exportReport() { showToast("📊 Reporte en desarrollo"); }
-
-/* ── WhatsApp: Lechones ─────────────────────────────────────── */
 function sendWALechon() {
-  const q = qtyLechon;
-  const msg = `Hola! Me interesa reservar *${q} lechón${q===1?'':'es'} para asado*.\n\n` +
-    `💰 Total estimado: $${PRICES.lMin*q} – $${PRICES.lMax*q}\n` +
-    `⚖️ Peso aprox: 20–35 lb por unidad\n\n` +
-    `¿Cuándo tienen disponibilidad?`;
-  guardarCliente("WhatsApp", "", "", "Lechones x" + q);
+  const q=qtyLechon;
+  const msg=`Hola! Me interesa reservar *${q} lechón${q===1?'':'es'} para asado*.\n\n💰 Total estimado: $${PRICES.lMin*q} – $${PRICES.lMax*q}\n⚖️ Peso aprox: 20–35 lb por unidad\n\n¿Cuándo tienen disponibilidad?`;
+  guardarCliente("WhatsApp","","","Lechones x"+q);
   closeModal();
-  window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
 }
 
-/* ── WhatsApp: Cerdo en pie ─────────────────────────────────── */
 function sendWAPie() {
-  const w = document.getElementById("sl-pie").value;
-  const msg = `Hola! Me interesa un *cerdo en pie para faena*.\n\n` +
-    `⚖️ Peso estimado: ${w} lb\n` +
-    `💰 Estimado: $${(w*PRICES.pMin).toFixed(0)}–$${(w*PRICES.pMax).toFixed(0)}\n\n` +
-    `¿Tienen disponibilidad?`;
-  guardarCliente("WhatsApp", "", "", "Cerdo en pie " + w + "lb");
-  window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+  const w=document.getElementById("sl-pie").value;
+  const msg=`Hola! Me interesa un *cerdo en pie para faena*.\n\n⚖️ Peso estimado: ${w} lb\n💰 Estimado: $${(w*PRICES.pMin).toFixed(0)}–$${(w*PRICES.pMax).toFixed(0)}\n\n¿Tienen disponibilidad?`;
+  guardarCliente("WhatsApp","","","Cerdo en pie "+w+"lb");
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
 }
 
-/* ── WhatsApp: Carrito de cortes ────────────────────────────── */
 function sendCartWA() {
-  if (!cart.length) { showToast("⚠️ Agrega al menos un corte"); return; }
-  const nombre   = document.getElementById("cli-name").value  || "Cliente";
-  const telefono = document.getElementById("cli-phone").value || "";
-  const sector   = document.getElementById("cli-addr").value  || "No indicada";
-  const tMin = cart.reduce((s, i) => s + i.tMin, 0);
-  const tMax = cart.reduce((s, i) => s + i.tMax, 0);
-  let msg = `Hola! Soy ${nombre}.\n\n🔪 *Pedido de cortes:*\n`;
-  cart.forEach(it => msg += `• ${it.name}: ${it.weight} lb → $${it.tMin.toFixed(2)}–$${it.tMax.toFixed(2)}\n`);
-  msg += `\n💵 *Total estimado: $${tMin.toFixed(2)}–$${tMax.toFixed(2)}*\n` +
-    `📍 Sector: ${sector}\n📱 WhatsApp: ${telefono}\n\n⚠️ Peso real puede variar ±10%.`;
-  guardarCliente(nombre, telefono, sector, "Cortes");
-  window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+  if(!cart.length){showToast("⚠️ Agrega al menos un corte");return;}
+  const nombre=document.getElementById("cli-name").value||"Cliente";
+  const telefono=document.getElementById("cli-phone").value||"";
+  const sector=document.getElementById("cli-addr").value||"No indicada";
+  const tMin=cart.reduce((s,i)=>s+i.tMin,0);
+  const tMax=cart.reduce((s,i)=>s+i.tMax,0);
+  let msg=`Hola! Soy ${nombre}.\n\n🔪 *Pedido de cortes:*\n`;
+  cart.forEach(it=>msg+=`• ${it.name}: ${it.weight} lb → $${it.tMin.toFixed(2)}–$${it.tMax.toFixed(2)}\n`);
+  msg+=`\n💵 *Total estimado: $${tMin.toFixed(2)}–$${tMax.toFixed(2)}*\n📍 Sector: ${sector}\n📱 WhatsApp: ${telefono}`;
+  guardarCliente(nombre,telefono,sector,"Cortes");
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
 }
 
-/* ── WhatsApp: Formulario de contacto ───────────────────────── */
 function sendContactWA() {
-  const nombre   = document.getElementById("msg-name").value    || "Cliente";
-  const producto = document.getElementById("msg-product").value || "No especificado";
-  const sector   = document.getElementById("msg-sector").value  || "No indicado";
-  const nota     = document.getElementById("msg-note").value    || "";
-  const msg = `Hola! Soy ${nombre}.\n\n🐷 *Producto:* ${producto}\n📍 *Sector:* ${sector}\n💬 *Detalles:* ${nota}`;
-  guardarCliente(nombre, "", sector, producto, nota);
-  window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+  const nombre=document.getElementById("msg-name").value||"Cliente";
+  const producto=document.getElementById("msg-product").value||"No especificado";
+  const sector=document.getElementById("msg-sector").value||"No indicado";
+  const nota=document.getElementById("msg-note").value||"";
+  const msg=`Hola! Soy ${nombre}.\n\n🐷 *Producto:* ${producto}\n📍 *Sector:* ${sector}\n💬 *Detalles:* ${nota}`;
+  guardarCliente(nombre,"",sector,producto,nota);
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
 }
 
-/* ── INICIALIZAR AL CARGAR ──────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", cargarPrecios);
 </script>
 </body>
