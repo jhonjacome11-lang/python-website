@@ -5,6 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'purochancho2025'
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '')
 
 # Base de datos simple en JSON (sin necesitar SQL)
 DB_FILE = 'data/clientes.json'
@@ -50,6 +51,13 @@ def guardar_cliente():
 def obtener_clientes():
     clientes = load_db()
     return jsonify(clientes)
+
+# ── API: LOGIN ADMIN ─────────────────────────────────────────
+@app.route('/api/login', methods=['POST'])
+def login_admin():
+    datos = request.get_json() or {}
+    password = datos.get('password', '')
+    return jsonify({'success': bool(ADMIN_PASSWORD and password == ADMIN_PASSWORD)})
 
 # ── API: GUARDAR PRECIOS (admin) ─────────────────────────────
 @app.route('/api/precios', methods=['POST'])
