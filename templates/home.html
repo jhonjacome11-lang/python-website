@@ -1403,12 +1403,8 @@
         <li><a href="#entrega"    data-view="entrega">Entrega</a></li>
         <li><a href="#contacto"   data-view="contacto">Contacto</a></li>
         <li>
-          <a
-            class="btn-dark"
-            href="https://wa.me/593980108244?text=Hola!"
-            target="_blank"
-            rel="noopener noreferrer"
-          >WhatsApp</a>
+          <a class="btn-dark" href="#" data-wa-href="Hola!"
+             target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </li>
       </ul>
     </div>
@@ -1442,12 +1438,8 @@
             </p>
             <div class="hero-actions">
               <a class="btn-dark" href="#productos" data-view="productos">Ver productos</a>
-              <a
-                class="btn-ghost"
-                href="https://wa.me/593980108244?text=Hola!+quiero+cotizar"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Comprar ahora</a>
+              <a class="btn-ghost" href="#" data-wa-href="Hola!+quiero+cotizar"
+                target="_blank" rel="noopener noreferrer">Comprar ahora</a>
             </div>
           </div>
 
@@ -1456,12 +1448,8 @@
             <div class="hero-price">$2.50/lb</div>
             <p class="hero-price-note">Precio fijo en cortes frescos</p>
             <div class="hero-actions">
-              <a
-                class="btn-wa btn-block"
-                href="https://wa.me/593980108244?text=Hola!+quiero+cotizar"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Cotizar por WhatsApp</a>
+              <a class="btn-wa btn-block" href="#" data-wa-href="Hola!+quiero+cotizar"
+                 target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>
             </div>
           </aside>
         </div>
@@ -1984,13 +1972,10 @@
               </div>
             </div>
 
-            <a
-              class="btn-wa btn-block"
-              href="https://wa.me/593980108244?text=Hola!+Me+interesa+hacer+un+pedido"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="margin-top:1rem"
-            >Escribir por WhatsApp ahora</a>
+            <a class="btn-wa btn-block" href="#"
+               data-wa-href="Hola!+Me+interesa+hacer+un+pedido"
+               target="_blank" rel="noopener noreferrer"
+               style="margin-top:1rem">Escribir por WhatsApp ahora</a>
           </article>
 
           <!-- Formulario de contacto (envía por WhatsApp) -->
@@ -2099,13 +2084,8 @@
   </footer>
 
   <!-- Botón flotante de WhatsApp -->
-  <a
-    class="wa-float"
-    href="https://wa.me/593980108244?text=Hola!"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Abrir WhatsApp"
-  >💬</a>
+            <a class="wa-float" href="#" data-wa-href="Hola!"
+               target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">💬</a>
 
   <!-- Notificación Toast -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -2279,14 +2259,18 @@
                   <th scope="col">Sector</th>
                   <th scope="col">Producto</th>
                   <th scope="col">Fecha</th>
+                  <th scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody id="clients-tbody">
-                <tr><td colspan="6">Cargando...</td></tr>
+                <tr><td colspan="7">Cargando...</td></tr>
               </tbody>
             </table>
           </div>
-          <button class="btn-admin-light" type="button" id="export-csv-clients-btn">Exportar clientes</button>
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem">
+            <button class="btn-admin-light" type="button" id="export-csv-clients-btn">Exportar CSV</button>
+            <a class="btn-admin" href="/api/export/excel" target="_blank" style="text-decoration:none">Descargar Excel 📅</a>
+          </div>
         </section>
 
         <!-- Panel: Inventario -->
@@ -2411,9 +2395,10 @@
         paleta:   'disponible',
         cabeza:   'disponible',
       },
-      clients:             [],    // Lista de clientes (admin)
-      adminAuthenticated:  false, // Flag de sesión admin
-      toastTimer:          null,  // Referencia al timeout del toast
+      clients:             [],
+      adminAuthenticated:  false,
+      toastTimer:          null,
+      waNumber:            '',  // cargado desde /api/config — nunca hardcodeado
     };
 
     /* ─────────────────────────────────────────────────────────────────────
@@ -2806,18 +2791,23 @@
        sendToWhatsApp() — Función base de envío
     ───────────────────────────────────────────────────────────────────── */
     function buildWhatsAppUrl(message) {
-      return `https://wa.me/593980108244?text=${encodeURIComponent(message)}`;
+      return `https://wa.me/${state.waNumber}?text=${encodeURIComponent(message)}`;
     }
 
     function sendToWhatsApp(message) {
+      if (!state.waNumber) { showToast('⚠ Cargando configuración...'); return; }
       window.open(buildWhatsAppUrl(message), '_blank', 'noopener,noreferrer');
     }
 
-    /* ── saveClient → Firebase (fallo silencioso) ───────────── */
+    /* ── saveClient → Flask ───────────────────────────────────── */
     async function saveClient(nombre, telefono, sector, producto, nota = '') {
-      if (typeof window.fbSaveClient === 'function') {
-        await window.fbSaveClient(nombre, telefono, sector, producto, nota);
-      }
+      try {
+        await fetch('/api/cliente', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, telefono, sector, producto, nota }),
+        });
+      } catch (_) { /* fallo silencioso */ }
     }
 
     function sendLechonToWhatsApp() {
@@ -3031,6 +3021,7 @@
           <td>${c.sector   || '—'}</td>
           <td>${c.producto || '—'}</td>
           <td>${c.fecha    || '—'}</td>
+          <td><button class="cart-row-del" data-delete-client="${c.id}" title="Eliminar pedido">🗑</button></td>
         </tr>
       `).join('');
     }
@@ -3081,9 +3072,69 @@
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     }
 
-    /* ── ARRANCAR ────────────────────────────────────────────────── */
+    /* ── deleteClient ─────────────────────────────────────────── */
+    async function deleteClient(cid) {
+      try {
+        await fetch(`/api/cliente/${cid}`, { method: 'DELETE' });
+        state.clients = state.clients.filter(c => c.id !== cid);
+        dom.statClients.textContent = String(state.clients.length);
+        renderClientsTable(state.clients);
+        showToast('🗑 Pedido eliminado');
+      } catch (_) { showToast('⚠ Error al eliminar'); }
+    }
+
+    /* Delegación: click en botón eliminar de la tabla */
+    document.addEventListener('click', (e) => {
+      const delBtn = e.target.closest('[data-delete-client]');
+      if (delBtn) { deleteClient(Number(delBtn.dataset.deleteClient)); return; }
+
+      /* Router SPA — se activa DESPUÉS de que dom existe */
+      const viewEl = e.target.closest('[data-view]');
+      if (viewEl) {
+        e.preventDefault();
+        showView(viewEl.dataset.view);
+        closeNav();
+      }
+    });
+
+    /* Bot Atrás/Adelante */
+    window.addEventListener('popstate', (e) => showView(e.state?.view || 'inicio'));
+
+    /* ── Router SPA ──────────────────────────────────────────── */
+    function showView(viewId) {
+      document.querySelectorAll('.spa-view').forEach(v => v.classList.remove('active'));
+      const target = document.getElementById('view-' + viewId);
+      if (target) { target.classList.add('active'); window.scrollTo({ top: 0 }); }
+      document.querySelectorAll('[data-view]').forEach(a =>
+        a.classList.toggle('nav-active', a.dataset.view === viewId)
+      );
+      history.pushState({ view: viewId }, '', '#' + viewId);
+      initReveal();
+    }
+
+    /* ── loadConfig: número WA desde backend (seguridad) ─────── */
+    async function loadConfig() {
+      try {
+        const res  = await fetch('/api/config');
+        const data = await res.json();
+        state.waNumber = data.wa || '';
+        /* Actualizar todos los hrefs de WhatsApp estáticos en el HTML */
+        document.querySelectorAll('[data-wa-href]').forEach(el => {
+          const msg = el.dataset.waHref;
+          el.href = `https://wa.me/${state.waNumber}?text=${encodeURIComponent(msg)}`;
+        });
+      } catch (_) { /* usa valor por defecto vacío */ }
+    }
+
+    /* ── ARRANCAR ────────────────────────────────────────────── */
     initApp();
+    loadConfig();
     loadPrices();
+
+    /* Leer hash inicial (ej: /index#productos) */
+    const _validViews = ['inicio','nosotros','productos','cortes','entrega','contacto'];
+    const _initHash   = location.hash.replace('#','');
+    if (_validViews.includes(_initHash)) showView(_initHash);
   </script>
 
 </body>
