@@ -1,268 +1,212 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
   <meta name="theme-color" content="#FBF3EC">
-  <title>04·08 — Para Nao (Versión mejorada)</title>
+  <title>04·08 — Para Nao (Versión final en updated)</title>
   <style>
-    html,body{ height:100%; margin:0; }
-    body{ background:#FBF3EC; font-family:Georgia, serif; }
-    #loader-note{ position:fixed; inset:12px; z-index:9999; pointer-events:none; font-family:Arial,Helvetica,sans-serif; color:#333; background:rgba(255,255,255,0.9); padding:10px 12px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.06); }
-    /* Canvas overlay that will host Three.js scenes and not remove existing content */
-    #threejs-overlay{ position:fixed; inset:0; z-index:30; pointer-events:none; touch-action:none; }
-    /* Small hint for touch to unlock audio */
-    #touch-hint{ position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:60; background:rgba(255,255,255,0.9); color:#333; padding:8px 12px; border-radius:999px; font-family:'Cormorant Garamond', serif; box-shadow:0 8px 24px rgba(0,0,0,0.08); }
-    .efecto-toque-corazon{ position:absolute; width:50px; height:50px; margin-left:-25px; margin-top:-25px; pointer-events:none; z-index:99; display:flex; align-items:center; justify-content:center; font-size:26px; animation:anim-onda-corazon 0.9s cubic-bezier(0.1,0.8,0.3,1) forwards; filter:drop-shadow(0 0 12px rgba(243,137,159,0.85)); }
-    @keyframes anim-onda-corazon{ 0%{ transform:scale(0.3); opacity:1; } 50%{ transform:scale(1.4); opacity:0.9; } 100%{ transform:scale(2.3); opacity:0; } }
-    /* Respect reduced motion */
+    html,body{height:100%;margin:0;background:#FBF3EC;font-family:'Cormorant Garamond', Georgia, serif;overflow:hidden;}
+    /* Overlay canvas sits on top of your original content */
+    #threejs-overlay{position:fixed;inset:0;z-index:40;pointer-events:none;width:100%;height:100%}
+    #touch-hint{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:60;background:rgba(255,255,255,0.92);padding:8px 12px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,0.08);font-size:14px}
+    .efecto-toque-corazon{position:absolute;width:50px;height:50px;margin-left:-25px;margin-top:-25px;pointer-events:none;z-index:99;display:flex;align-items:center;justify-content:center;font-size:26px;animation:anim-onda-corazon 0.9s cubic-bezier(0.1,0.8,0.3,1) forwards;filter:drop-shadow(0 0 12px rgba(243,137,159,0.85))}
+    @keyframes anim-onda-corazon{0%{transform:scale(0.3);opacity:1}50%{transform:scale(1.4);opacity:0.9}100%{transform:scale(2.3);opacity:0}}
     @media (prefers-reduced-motion: reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+    /* Helper fallback if no WebGL */
+    .no-webgl #threejs-overlay{display:none}
   </style>
 </head>
 <body>
-  <div id="loader-note">Cargando versión mejorada... esta página cargará el contenido original y añadirá mejoras 3D no destructivas para revisión.</div>
-  <div id="touch-hint">Toca la pantalla para desbloquear audio y ver animaciones</div>
+  <div id="touch-hint">Toca la pantalla para desbloquear audio y ver las animaciones</div>
   <canvas id="threejs-overlay"></canvas>
 
   <script>
-  // Esto es un loader inteligente que toma el HTML original del repo (raw) y lo injerta en el DOM,
-  // luego añade mejoras 3D y parches de compatibilidad. Diseñado para revisión: no sobreescribe el archivo original.
+  /*
+    nao-04-08_6.updated.html (FINAL)
+    - Inyecta el HTML original desde la rama main (raw) para mantener fotos/audio embebido.
+    - Añade overlay Three.js con:
+        * Galaxia / vórtice en forma de corazón (partículas)
+        * Frases orbitantes (DOM)
+        * Textura de partícula circular creada en runtime si sprite no disponible
+    - Mejora: ajuste DPR, sizeAttenuation, size por dispositivo, y fallback .no-webgl
+    - Audio unlock en primer toque y efecto visual de onda/♥
+  */
   (async function(){
-    const rawUrl = 'https://raw.githubusercontent.com/jhonjacome11-lang/python-website/main/nao-04-08_6.html';
-    let originalText = '';
+    // 1) Cargar el HTML original en modo no destructivo (se inyecta en container)
+    const RAW_URL = 'https://raw.githubusercontent.com/jhonjacome11-lang/python-website/main/nao-04-08_6.html';
     try{
-      const r = await fetch(rawUrl);
-      if (!r.ok) throw new Error('No se pudo obtener el HTML original: '+r.status);
-      originalText = await r.text();
-    }catch(err){
-      console.error('No se pudo cargar el archivo original:', err);
-      document.getElementById('loader-note').textContent = 'Error al cargar el archivo original. Revisa la consola.';
-      return;
-    }
+      const r = await fetch(RAW_URL);
+      if (!r.ok) throw new Error('No se pudo cargar el HTML original: '+r.status);
+      const text = await r.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/html');
 
-    // Parse original HTML and import its body content into current document
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(originalText, 'text/html');
-
-    // Import head elements (styles, fonts) if not already present
-    try{
-      const originalHead = doc.head.cloneNode(true);
-      // Merge fonts link elements (avoid duplicates)
-      [...originalHead.querySelectorAll('link[rel="stylesheet"],link[rel="preconnect"],style,meta')].forEach(n=>{
-        // simple duplicate prevention by outerHTML match
-        if (!Array.from(document.head.children).some(c=>c.outerHTML===n.outerHTML)) document.head.appendChild(n.cloneNode(true));
+      // Import fonts/styles from original head (avoid duplicates)
+      [...doc.head.querySelectorAll('link[rel="stylesheet"],link[rel="preconnect"],style')].forEach(node=>{
+        const outer = node.outerHTML;
+        if (!Array.from(document.head.children).some(c=>c.outerHTML===outer)) {
+          document.head.appendChild(node.cloneNode(true));
+        }
       });
-    }catch(e){ console.warn(e); }
 
-    // Replace current body with original body, but preserve our overlay elements
-    const originalBody = doc.body;
-    // Move original body children into a container so we can keep overlay canvas on top
-    const container = document.createElement('div');
-    container.id = 'nao-original-container';
-    // Move children
-    Array.from(originalBody.childNodes).forEach(n=> container.appendChild(document.importNode(n, true)));
+      // Insert original body content into container (non-destructive)
+      const container = document.createElement('div');
+      container.id = 'nao-original-container';
+      container.style.position = 'relative';
+      container.style.zIndex = '10';
+      Array.from(doc.body.childNodes).forEach(n => container.appendChild(document.importNode(n, true)));
 
-    // Clear body's content except our overlays
-    // Remove any existing original content placeholder except our canvas and hints
-    Array.from(document.body.childNodes).forEach(node=>{
-      if (node.id === 'threejs-overlay' || node.id === 'loader-note' || node.id === 'touch-hint') return;
-      node.remove();
-    });
+      // Remove everything except our overlay elements (to keep page clean) and then insert container
+      Array.from(document.body.childNodes).forEach(n=>{
+        if (n.id === 'threejs-overlay' || n.id === 'touch-hint') return;
+        n.remove();
+      });
+      const overlay = document.getElementById('threejs-overlay');
+      document.body.insertBefore(container, overlay);
 
-    // Insert the original container under the overlays so it appears visually below
-    // We'll place it before the overlay canvas so overlays remain on top via z-index
-    const overlay = document.getElementById('threejs-overlay');
-    document.body.insertBefore(container, overlay);
-
-    // Remove loader note after injected
-    setTimeout(()=>{ const n=document.getElementById('loader-note'); if(n) n.remove(); }, 1200);
-
-    // Now inject the enhancement script (Three.js loader + audio unlock + DPR adjustments)
-    function injectEnhancements(){
-      // 1) Audio unlock, canvas DPR adjust, touch effect
-      const enhancementScript = document.createElement('script');
-      enhancementScript.type = 'text/javascript';
-      enhancementScript.textContent = `
-(function(){
-  if (window.__nao_enhancements_loaded) return; window.__nao_enhancements_loaded = true;
-  // Adjust canvases to DPR
-  function resizeCanvasDPR(canvas){
-    if (!canvas) return;
-    const dpr = Math.min(window.devicePixelRatio||1, 2);
-    const rect = canvas.getBoundingClientRect();
-    const w = Math.max(1, Math.round(rect.width * dpr));
-    const h = Math.max(1, Math.round(rect.height * dpr));
-    if (canvas.width !== w || canvas.height !== h){
-      canvas.width = w; canvas.height = h;
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      if (gl && gl.viewport) gl.viewport(0,0,w,h);
-      const ctx2 = canvas.getContext('2d');
-      if (ctx2 && ctx2.setTransform) ctx2.setTransform(dpr,0,0,dpr,0,0);
-    }
-  }
-  function resizeAll(){
-    document.querySelectorAll('canvas').forEach(c=>resizeCanvasDPR(c));
-  }
-  window.addEventListener('resize', ()=>setTimeout(resizeAll,60));
-  window.addEventListener('orientationchange', ()=>setTimeout(resizeAll,120));
-  window.addEventListener('load', ()=>setTimeout(resizeAll,400));
-
-  // Audio unlock helper
-  let audioCtx = null;
-  function ensureAudio(){
-    if (audioCtx) return audioCtx;
-    try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){ audioCtx = null; }
-    return audioCtx;
-  }
-  function unlockAudio(){
-    const ac = ensureAudio(); if (!ac) return;
-    if (ac.state === 'suspended') ac.resume().catch(()=>{});
-    try{
-      const buffer = ac.createBuffer(1,1,22050);
-      const src = ac.createBufferSource(); src.buffer = buffer; src.connect(ac.destination); src.start(0);
-      setTimeout(()=>{ try{ src.disconnect(); }catch(e){} },200);
-    }catch(e){}
-    document.querySelectorAll('audio').forEach(a=>{ try{ a.setAttribute('playsinline','true'); a.setAttribute('webkit-playsinline','true'); }catch(e){} });
-  }
-
-  // Touch visual
-  function showTouchEffect(x,y){ const el = document.createElement('div'); el.className='efecto-toque-corazon'; el.style.left = x+'px'; el.style.top = y+'px'; el.textContent='💗'; document.body.appendChild(el); setTimeout(()=>el.remove(),950); }
-
-  // First interaction handler
-  function firstInteraction(ev){ const touch = (ev.touches && ev.touches[0]); const x = touch?touch.clientX:(ev.clientX||window.innerWidth/2); const y = touch?touch.clientY:(ev.clientY||window.innerHeight/2); try{ unlockAudio(); }catch(e){} try{ showTouchEffect(x,y); }catch(e){} window.removeEventListener('touchstart', firstInteraction, {passive:true}); window.removeEventListener('click', firstInteraction, {passive:true}); }
-  const capa = document.getElementById('capa-toque') || document.body; capa.addEventListener('touchstart', firstInteraction, {passive:true}); capa.addEventListener('click', firstInteraction, {passive:true});
-
-  // WebGL detection class
-  (function(){ try{ const c=document.createElement('canvas'); const has = !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl'))); if(!has) document.documentElement.classList.add('no-webgl'); }catch(e){ document.documentElement.classList.add('no-webgl'); } })();
-
-  // Expose utilities
-  window.__nao_resize_all = resizeAll;
-  window.__nao_unlock_audio = unlockAudio;
-})();
-      `;
-      document.body.appendChild(enhancementScript);
-
-      // 2) Load Three.js (non-module) and then run a lightweight scene builder
-      const threeScript = document.createElement('script');
-      threeScript.src = 'https://unpkg.com/three@0.152.2/build/three.min.js';
-      threeScript.onload = function(){
-        // run scene init
-        try{ initThreeScenes(); }catch(e){ console.error('Error iniciando Three.js scenes', e); }
-      };
-      document.body.appendChild(threeScript);
-
-      // Add the scene init function
-      const sceneScript = document.createElement('script');
-      sceneScript.type = 'text/javascript';
-      sceneScript.textContent = `
-function initThreeScenes(){
-  // overlay canvas
-  const canvas = document.getElementById('threejs-overlay');
-  canvas.style.pointerEvents = 'none';
-  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha:true, antialias: !isMobile });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-  renderer.setSize(window.innerWidth, window.innerHeight, false);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 2000);
-  camera.position.set(0,0,220);
-
-  // Heart vortex particle system
-  const particleCount = isMobile? 400 : 1400;
-  const positions = new Float32Array(particleCount*3);
-  const colors = new Float32Array(particleCount*3);
-
-  // Heart parametric generation
-  function heartPoint(t){
-    // param t from 0..2PI
-    const x = 16*Math.pow(Math.sin(t),3);
-    const y = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
-    return [x,y];
-  }
-
-  for(let i=0;i<particleCount;i++){
-    const t = (i/particleCount) * Math.PI*2 * 6; // multiple turns
-    const r = (0.6 + 0.8*Math.random()) * (50 + 40*Math.sin(i*0.12));
-    const [hx, hy] = heartPoint((i/particleCount)*Math.PI*2);
-    // swirl
-    const theta = t + i*0.02;
-    const px = (hx*6)*Math.cos(theta) * 0.9;
-    const py = (hy*6)*Math.sin(theta) * 0.8;
-    const pz = -i*0.02 + Math.sin(i*0.05)*6;
-    positions[i*3] = px + (Math.random()-0.5)*6;
-    positions[i*3+1] = py + (Math.random()-0.5)*6;
-    positions[i*3+2] = pz;
-    colors[i*3] = 1.0; colors[i*3+1] = 0.3 + Math.random()*0.6; colors[i*3+2] = 0.6 + Math.random()*0.4;
-  }
-
-  const geom = new THREE.BufferGeometry();
-  geom.setAttribute('position', new THREE.BufferAttribute(positions,3));
-  geom.setAttribute('color', new THREE.BufferAttribute(colors,3));
-  const mat = new THREE.PointsMaterial({ size: isMobile? 4 : 6, vertexColors: true, transparent:true, opacity:0.95, depthWrite:false, blending: THREE.AdditiveBlending});
-  const points = new THREE.Points(geom, mat);
-  scene.add(points);
-
-  // Add soft light bloom illusion using sprites
-  const spriteMap = new THREE.TextureLoader().load('https://raw.githubusercontent.com/jhonjacome11-lang/python-website/main/static/images/corazon-sprite.png');
-  // If sprite not found, Points fallback used
-
-  // Orbiting phrases (simple sprites using DOM overlay for clarity) - we will create DOM phrases that move with requestAnimationFrame
-  const phrases = ["TE AMO","CON LOCURA","ERES MAGIA","MI PERSONA FAVORITA","MI VIDA ENTERA","NUESTRO UNIVERSO","TU Y YO","CON TODO MI CORAZÓN"];
-  const phraseEls = [];
-  const orbContainer = document.createElement('div');
-  orbContainer.className = 'orbita-elementos-nao';
-  orbContainer.style.position = 'absolute'; orbContainer.style.left='0'; orbContainer.style.top='0'; orbContainer.style.width='100%'; orbContainer.style.height='100%'; orbContainer.style.pointerEvents='none'; orbContainer.style.zIndex='40';
-  document.body.appendChild(orbContainer);
-  phrases.forEach((p,idx)=>{
-    const d = document.createElement('div'); d.className = 'frase-orbitante-3d'; d.textContent = p; d.style.position='absolute'; d.style.left='50%'; d.style.top='50%'; d.style.transform='translate(-50%,-50%)'; d.style.opacity='0.9'; d.style.fontSize = isMobile? '14px':'18px'; orbContainer.appendChild(d); phraseEls.push(d);
-  });
-
-  // Resize handler
-  function onResize(){
-    const w = window.innerWidth, h = window.innerHeight;
-    camera.aspect = w/h; camera.updateProjectionMatrix(); renderer.setSize(w,h,false);
-  }
-  window.addEventListener('resize', onResize);
-
-  // Animation loop
-  let t0 = 0;
-  function animate(t){
-    const dt = (t - t0) * 0.001; t0 = t;
-    // rotate points slowly
-    points.rotation.y += 0.0025 + (isMobile? 0.0007:0.0015);
-    points.rotation.x += 0.0012;
-    // slight pulsation
-    const s = 1 + 0.02*Math.sin(t*0.0027);
-    points.scale.setScalar(s);
-
-    // move phrases orbiting
-    phraseEls.forEach((el,i)=>{
-      const speed = 0.0008*(1+i*0.12);
-      const radius = 110 + i*12 + 30*Math.sin(t*0.001 + i);
-      const angle = t*speed + i*0.9;
-      const cx = window.innerWidth/2; const cy = window.innerHeight/2;
-      const x = Math.round(cx + Math.cos(angle) * radius);
-      const y = Math.round(cy + Math.sin(angle) * radius*0.6);
-      el.style.left = x+'px'; el.style.top = y+'px';
-      el.style.opacity = 0.6 + 0.4*Math.sin(t*0.001 + i);
-    });
-
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
-}
-      `;
-      document.body.appendChild(sceneScript);
+    }catch(err){
+      console.warn('No se pudo inyectar contenido original:', err);
+      // Continue even if fetch fails; overlay still works for preview
     }
 
-    injectEnhancements();
+    // 2) Utility: adjust canvases to DPR
+    function resizeCanvasForDPR(canvas){
+      if (!canvas) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width !== w || canvas.height !== h){
+        canvas.width = w;
+        canvas.height = h;
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (gl && gl.viewport) gl.viewport(0, 0, w, h);
+        const ctx2d = canvas.getContext('2d');
+        if (ctx2d && ctx2d.setTransform) ctx2d.setTransform(dpr,0,0,dpr,0,0);
+      }
+    }
+    function resizeAllCanvases(){ document.querySelectorAll('canvas').forEach(c=>resizeCanvasForDPR(c)); }
+    window.addEventListener('resize', ()=>setTimeout(resizeAllCanvases,60));
+    window.addEventListener('orientationchange', ()=>setTimeout(resizeAllCanvases,120));
+    window.addEventListener('load', ()=>setTimeout(resizeAllCanvases,300));
 
-    // small UX: remove touch hint after first touch
-    function removeTouchHint(){ const h = document.getElementById('touch-hint'); if(h) h.remove(); window.removeEventListener('touchstart', removeTouchHint); window.removeEventListener('click', removeTouchHint); }
-    window.addEventListener('touchstart', removeTouchHint, {passive:true});
-    window.addEventListener('click', removeTouchHint, {passive:true});
+    // 3) Audio unlock (first user gesture)
+    let audioCtx = null;
+    function ensureAudioContext(){
+      if (audioCtx) return audioCtx;
+      try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){ audioCtx = null; }
+      return audioCtx;
+    }
+    function unlockAudio(){
+      const ac = ensureAudioContext();
+      if (!ac) return;
+      if (ac.state === 'suspended') ac.resume().catch(()=>{});
+      try{
+        const buffer = ac.createBuffer(1,1,22050);
+        const src = ac.createBufferSource(); src.buffer = buffer; src.connect(ac.destination); src.start(0);
+        setTimeout(()=>{ try{ src.disconnect(); }catch(e){} },200);
+      }catch(e){}
+      document.querySelectorAll('audio').forEach(a=>{ try{ a.setAttribute('playsinline','true'); a.setAttribute('webkit-playsinline','true'); }catch(e){} });
+    }
+
+    // 4) Touch effect & first interaction handler
+    function showTouchEffect(x,y){ const el=document.createElement('div'); el.className='efecto-toque-corazon'; el.style.left = x+'px'; el.style.top = y+'px'; el.textContent='💗'; document.body.appendChild(el); setTimeout(()=>el.remove(),950); }
+    function firstInteraction(ev){
+      const t = (ev.touches && ev.touches[0]);
+      const x = t ? t.clientX : (ev.clientX || window.innerWidth/2);
+      const y = t ? t.clientY : (ev.clientY || window.innerHeight/2);
+      try{ unlockAudio(); }catch(e){}
+      try{ showTouchEffect(x,y); }catch(e){}
+      const hint = document.getElementById('touch-hint'); if (hint) hint.remove();
+      window.removeEventListener('touchstart', firstInteraction, {passive:true});
+      window.removeEventListener('click', firstInteraction, {passive:true});
+    }
+    const capa = document.getElementById('capa-toque') || document.body;
+    window.addEventListener('touchstart', firstInteraction, {passive:true});
+    window.addEventListener('click', firstInteraction, {passive:true});
+
+    // 5) Detect WebGL (fallback class)
+    (function(){ try{ const c = document.createElement('canvas'); const ok = !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl'))); if(!ok) document.documentElement.classList.add('no-webgl'); }catch(e){ document.documentElement.classList.add('no-webgl'); } })();
+
+    // 6) Load Three.js
+    function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+    try{ await loadScript('https://unpkg.com/three@0.152.2/build/three.min.js'); }catch(err){ console.warn('No se pudo cargar Three.js:', err); return; }
+
+    // 7) Scene init with circular particle texture + DPR/resizing + sizeAttenuation
+    (function initThree(){
+      const canvas = document.getElementById('threejs-overlay');
+      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+      const renderer = new THREE.WebGLRenderer({canvas: canvas, alpha:true, antialias: !isMobile});
+      renderer.autoClear = true;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight, false);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 5000);
+      camera.position.set(0, 0, 260);
+
+      function makeCircleTexture(size=128, hue='#FF5A8F'){
+        const c = document.createElement('canvas'); c.width = c.height = size; const ctx = c.getContext('2d');
+        const grd = ctx.createRadialGradient(size/2,size/2, size*0.05, size/2,size/2,size/1.1);
+        grd.addColorStop(0, 'rgba(255,255,255,1)');
+        grd.addColorStop(0.18, hue);
+        grd.addColorStop(0.9, 'rgba(255,255,255,0)');
+        ctx.fillStyle = grd; ctx.fillRect(0,0,size,size);
+        const tex = new THREE.CanvasTexture(c);
+        tex.minFilter = THREE.LinearMipMapLinearFilter; tex.magFilter = THREE.LinearFilter; tex.generateMipmaps = true; tex.needsUpdate = true;
+        return tex;
+      }
+
+      const particleCount = isMobile ? 420 : 1200;
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+      const sizes = new Float32Array(particleCount);
+
+      function heartXY(t){ const x = 16 * Math.pow(Math.sin(t), 3); const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t); return [x,y]; }
+
+      for(let i=0;i<particleCount;i++){
+        const u = i / particleCount; const turns = 4.0 + u*3.0; const t = u * Math.PI * 2 * turns;
+        const [hx, hy] = heartXY(u * Math.PI*2);
+        const spiral = 0.7 + 1.6 * u;
+        positions[i*3]   = (hx*6 + (Math.random()-0.5)*6) * Math.cos(t) * spiral;
+        positions[i*3+1] = (hy*6 + (Math.random()-0.5)*6) * Math.sin(t) * spiral * 0.9;
+        positions[i*3+2] = - u * 180 + Math.sin(i*0.05)*6;
+        const r = 1.0; const g = 0.25 + Math.random()*0.45; const b = 0.6 + Math.random()*0.35;
+        colors[i*3] = r; colors[i*3+1] = g; colors[i*3+2] = b; sizes[i] = isMobile ? (3 + Math.random()*4) : (5 + Math.random()*6);
+      }
+
+      const geom = new THREE.BufferGeometry(); geom.setAttribute('position', new THREE.BufferAttribute(positions, 3)); geom.setAttribute('color', new THREE.BufferAttribute(colors, 3)); geom.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+      const spriteUrl = 'https://raw.githubusercontent.com/jhonjacome11-lang/python-website/main/static/images/corazon-sprite.png';
+      const loader = new THREE.TextureLoader(); let spriteTex = null;
+      loader.load(spriteUrl,
+        function(tex){ spriteTex = tex; spriteTex.minFilter = THREE.LinearMipMapLinearFilter; spriteTex.magFilter = THREE.LinearFilter; spriteTex.needsUpdate = true; },
+        undefined,
+        function(){ spriteTex = makeCircleTexture(128, '#FF6B9F'); }
+      );
+
+      const material = new THREE.PointsMaterial({ size: isMobile ? 6.5 : 10.5, map: null, vertexColors: true, transparent: true, opacity: 0.95, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true });
+      const checkTextureInterval = setInterval(()=>{
+        if (spriteTex){ material.map = spriteTex; material.needsUpdate = true; clearInterval(checkTextureInterval); }
+      }, 80);
+      if (!material.map) material.map = makeCircleTexture(128, '#FF6B9F');
+
+      const points = new THREE.Points(geom, material); scene.add(points);
+
+      const phrases = ["TE AMO","CON LOCURA","ERES MAGIA","MI PERSONA FAVORITA","MI VIDA ENTERA","NUESTRO UNIVERSO","TU Y YO","CON TODO MI CORAZÓN"]; const phraseEls = [];
+      const orbContainer = document.createElement('div'); orbContainer.style.position='absolute'; orbContainer.style.left='0'; orbContainer.style.top='0'; orbContainer.style.width='100%'; orbContainer.style.height='100%'; orbContainer.style.pointerEvents='none'; orbContainer.style.zIndex='35'; document.body.appendChild(orbContainer);
+      phrases.forEach((p,idx)=>{ const el=document.createElement('div'); el.textContent=p; el.style.position='absolute'; el.style.left='50%'; el.style.top='50%'; el.style.transform='translate(-50%,-50%)'; el.style.fontFamily="'Cormorant Garamond', serif"; el.style.fontStyle='italic'; el.style.letterSpacing='0.06em'; el.style.color='rgba(255,230,238,0.9)'; el.style.textShadow='0 0 12px #FF7AA6'; el.style.pointerEvents='none'; el.style.fontSize = isMobile ? '12px' : '16px'; el.style.opacity='0.85'; orbContainer.appendChild(el); phraseEls.push(el); });
+
+      function onResize(){ const w=window.innerWidth, h=window.innerHeight; renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); resizeAllCanvases(); }
+      window.addEventListener('resize', onResize);
+
+      let timePrev = performance.now();
+      function animate(now){ const dt=(now-timePrev)*0.001; timePrev=now; points.rotation.y += 0.0016 + (isMobile?0.0006:0.0012); points.rotation.x += 0.0008; const pulse = 1 + 0.03 * Math.sin(now*0.0028); points.scale.setScalar(pulse); phraseEls.forEach((el,i)=>{ const baseSpeed = 0.00075 + i*0.00015; const angle = now*baseSpeed + i*0.78; const radius = 110 + i*12 + 18*Math.sin(now*0.001 + i); const cx = window.innerWidth/2, cy = window.innerHeight/2; const x = Math.round(cx + Math.cos(angle)*radius); const y = Math.round(cy + Math.sin(angle)*radius*0.6); el.style.left = x+'px'; el.style.top = y+'px'; el.style.opacity = (0.55 + 0.45*(0.5 + 0.5*Math.sin(now*0.001 + i))); }); renderer.render(scene, camera); requestAnimationFrame(animate); }
+      requestAnimationFrame(animate);
+
+      window.__three_nao = { renderer, scene, camera, points, material };
+    })();
 
   })();
   </script>
